@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=./quartz/plugins/quartz-plugins.schema.json
 configuration:
-  pageTitle: Заметки | Yuriy
+  pageTitle: Цифровой Сад 🌿
   pageTitleSuffix: ""
   enableSPA: true
   enablePopovers: true
@@ -214,7 +214,7 @@ plugins:
     options: {}
     order: 50
   - source: github:quartz-community/note-properties
-    enabled: false
+    enabled: true
     options:
       includeAll: false
       includedProperties:
@@ -222,7 +222,7 @@ plugins:
         - tags
         - aliases
       excludedProperties: []
-      hidePropertiesView: false
+      hidePropertiesView: true
       delimiters: ---
       language: yaml
     order: 5
