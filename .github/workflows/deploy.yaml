@@ -38,6 +38,12 @@ jobs:
       - name: Build Quartz
         run: npx quartz build
 
+      - name: Bypass Jekyll
+        run: touch public/.nojekyll
+
+      - name: Debug Output
+        run: ls -la public/static/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -56,3 +62,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
