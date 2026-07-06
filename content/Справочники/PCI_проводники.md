@@ -11,8 +11,6 @@ url: "https://www.instagram.com/reel/DaaG1s_SWHq/?igsh=M2RxZzFoNGFoODdr"
 
 ## PCI проводники — классификация и свойства
 
-![[pci_provod_1.jpg]]
-
 > **Источник:** [@dragoncathx](https://www.instagram.com/reel/DaaG1s_SWHq/?igsh=M2RxZzFoNGFoODdr) (Instagram), серия «Interventional Cardiology»
 
 ### Продукты на слайде (Abbott Vascular)
@@ -27,11 +25,11 @@ url: "https://www.instagram.com/reel/DaaG1s_SWHq/?igsh=M2RxZzFoNGFoODdr"
 
 ---
 
-![[pci_provod_2.jpg]]
-
 ## Ключевые различия PCI-проводников
 
 Проводники для ЧКВ различают по **материалу ядра**, **покрытию** и **конструкции дистального сегмента**.
+
+![[pci_provod.png]]
 
 ### Nitinol vs нержавеющая сталь
 
@@ -51,8 +49,6 @@ url: "https://www.instagram.com/reel/DaaG1s_SWHq/?igsh=M2RxZzFoNGFoODdr"
 > **Ключевое ограничение nitinol:** проводник склонен **запоминать** форму, а не передавать крутящий момент на кончик — в отличие от stainless steel.
 
 ---
-
-![[pci_provod_3.jpg]]
 
 ### Гидрофильные проводники (Hydrophilic wires)
 
