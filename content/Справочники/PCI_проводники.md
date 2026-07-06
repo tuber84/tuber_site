@@ -5,22 +5,22 @@ tags: [медицина, cardiology, PCI, проводник, guidewire, endovas
 aliases: [PCI wires, коронарные проводники, гидрофильные проводники, hydrophilic wires, nitinol wire]
 cssclasses: [hermes-note]
 links: []
-url: "https://www.instagram.com/reel/DaaG1s_SWHq/"
-дата: "2026-07-06 {{time}}"
+url: "https://www.instagram.com/reel/DaaG1s_SWHq/?igsh=M2RxZzFoNGFoODdr"
+дата: "2026-07-06"
 ---
 
 ## PCI проводники — классификация и свойства
 
 ![[pci_provod_1.jpg]]
 
-> **Источник:** @dragoncathx (Instagram), серия «Interventional Cardiology»
+> **Источник:** [@dragoncathx](https://www.instagram.com/reel/DaaG1s_SWHq/?igsh=M2RxZzFoNGFoODdr) (Instagram), серия «Interventional Cardiology»
 
 ### Продукты на слайде (Abbott Vascular)
 
 | Проводник | Тип | Особенность |
 |----------|-----|-------------|
 | **PILOT 150** | Гидрофильный | Экстра-поддержка, CTO |
-| **Balance Middleweight Universal** | Универсальный | Баланс support/trackability |
+| **Balance Middleweight Universal** | Универсальный | Баланс support / trackability |
 | **Whisper MS** | Гидрофильный | Moderate Support |
 | **Whisper ES** | Гидрофильный | Extra Support |
 | **Balance Middleweight 0.014" 300 cm** | Универсальный | 300 cm — для обменных техник |
@@ -29,72 +29,69 @@ url: "https://www.instagram.com/reel/DaaG1s_SWHq/"
 
 ![[pci_provod_2.jpg]]
 
-### 🔸 Discriminating Differences of PCI Wire
+## Ключевые различия PCI-проводников
 
-Проводники для ЧКВ классифицируются по **материалу ядра** и **покрытию**:
+Проводники для ЧКВ различают по **материалу ядра**, **покрытию** и **конструкции дистального сегмента**.
 
-### Nitinol vs Stainless-Steel Wires
+### Nitinol vs нержавеющая сталь
 
-| Свойство | **Nitinol** (Ni-Ti) | **Stainless Steel** |
-|----------|--------------------|--------------------|
-| Kink resistance | ✅✅ Высокая | ⚠️ Ниже |
-| Torque transmission | ✅ Отличная | ✅ Хорошая |
-| Tactile feel | ✅ Сохраняется | ✅✅ Лучше |
-| Trackability | ✅✅ Высокая | ✅ |
-| Острые углы | ✅✅ Проходит | ⚠️ Может застрять |
-| Fatigue-resistant shape memory | ✅ Есть | ❌ Нет |
-| Ограничение | ⚠️ Может «prform» — сохранять заданную форму при деформации | — |
+| Свойство | **Nitinol** (Ni-Ti) | **Stainless steel** |
+|----------|---------------------|---------------------|
+| Устойчивость к заломам (kink resistance) | Высокая | Ниже, склонны к заломам |
+| Прохождение острых углов | Лучше, без пролапса проводника | Хуже в извитостях |
+| Trackability | Высокая — «сбалансированная передача силы» | Умеренная |
+| Торк и тактильность | Ядро до кончика → хороший torque + tactile feel | Лучшая тактильная обратная связь |
+| Ретрофлексия ОВ | Чаще проходит ретрофлексное устье ОВ | Сложнее |
+| Ограничение | **Накапливает, а не передаёт крутящий момент** | — |
 
-> **Суть:** Nitinol — для tortuosity и острых углов. Stainless steel — для тактильной обратной связи и прямого доступа.
+Проводники с **нитиноловым ядром** устойчивы к заломам; проводники с **ядром из нержавеющей стали** к заломам более восприимчивы. Ядро, простирающееся до дистального кончика, обеспечивает лучшую передачу крутящего момента и тактильную обратную связь.
+
+Нитинол повышает **trackability** — способность проходить острые изгибы артерий без пролапса проводника (*balanced force transmission*). Нитиноловый проводник чаще входит в ретрофлексное устье огибающей ветви, чем проводник с ядром из нержавеющей стали.
+
+> **Ключевое ограничение nitinol:** проводник склонен **запоминать** форму, а не передавать крутящий момент на кончик — в отличие от stainless steel.
 
 ---
-
-### 🔸 Hydrophilic Wires
 
 ![[pci_provod_3.jpg]]
 
-**Свойства гидрофильных проводников:**
-- Высокая гибкость и kink-resistance
-- Гидрофильное полиуретановое покрытие
-- Ядро из сверхэластичного сплава **титан-никель** (Nitinol)
-- Исключительная гибкость + pushability
-- Низкая тромбогенность
-- Экстремальная смазываемость (lubricity) при смачивании
+### Гидрофильные проводники (Hydrophilic wires)
 
-**Примеры гидрофильных проводников:**
+Гибкие и устойчивые к заломам проводники с **гидрофильным полиуретановым покрытием**. Ядро — сверхэластичный сплав **титан–никель** (nitinol): высокая гибкость, устойчивость к kinking, улучшенная pushability. Гидрофильное полимерное покрытие снижает тромбогенность и даёт экстремальную смазываемость (*lubricity*) при смачивании.
 
-🔸 **Choice PT** (Boston Scientific / Scimed, Inc., Maple Grove, MN)
-🔸 **Asahi Prowater** (Abbott Vascular, Abbott Park, IL)
-🔸 **Whisper** (Abbott Vascular, Abbott Park, IL)
-🔸 **Runthrough** (Terumo, Shibuya, Tokyo, Japan)
+**Примеры:**
 
-> ⚠️ **Осторожность:** Гидрофильные проводники имеют низкое трение и легко проходят извитости, но **повышенный риск диссекции или перфорации**, особенно при попадании в мелкие ветви.
+| Проводник | Производитель |
+|-----------|---------------|
+| **Choice™ PT** | Boston Scientific / Scimed, Maple Grove, MN |
+| **Asahi Prowater®** | Abbott Vascular, Abbott Park, IL |
+| **Whisper®** | Abbott Vascular, Abbott Park, IL |
+| **Runthrough®** | Terumo, Shibuya, Tokyo, Japan |
+
+> ⚠️ **Осторожность:** низкое трение — легко проходят извитости, но **повышенный риск диссекции или перфорации**, особенно при уходе в мелкую боковую ветвь.
 
 ---
 
-### 🔸 Soft Delivery Catheters
+### Мягкие доставочные катетеры (Soft delivery catheters)
 
-Мягкие доставочные катетеры для проведения проводников / device delivery:
+Снижают трение на проксимальном сегменте и улучшают управляемость проводника:
 
-- **Twin-Pass** catheter (TeleFlex, Wayne, PA, USA)
-- **Venture** deflectable-tip catheter (Velocimed, Minneapolis, MN)
-- **Steer-It** deflectable-tip wire (St Jude, Minneapolis, MN)
+| Устройство | Производитель | Назначение |
+|------------|---------------|------------|
+| **Transit** / **Twin-Pass** (двухпросветный) | TeleFlex, Wayne, PA | Снижение трения, улучшение steerability |
+| **Venture™** (deflectable-tip) | Velocimed, Minneapolis, MN | Проведение через извитые сегменты; эффективнее в **крупных** коронарных артериях |
+| **Steer-It™** (deflectable-tip wire) | St Jude, Minneapolis, MN | Управляемый кончик — аналогичная ниша |
 
 ---
 
-### Шпаргалка в одну фразу
+### Шпаргалка
 
-> Проводник = материал ядра (Nitinol = гибкость/tortuosity, Stainless = тактильность) + покрытие (Hydrophilic = смазываемость/низкое трение, но риск perforation). Выбор зависит от клинической задачи: CTO → extra-support, извитости → hydrophilic, тактильный контроль → stainless steel.
+> **Nitinol** — извитости и острые углы, но плохо передаёт torque. **Stainless steel** — тактильность и кручение. **Hydrophilic** — смазываемость и trackability, но риск perforation. **Deflectable tip / soft delivery** — помощь в сложной анатомии.
 
-### Сравнение ключевых типов
+### Сравнение типов
 
 | Тип | Примеры | Плюс | Минус |
 |-----|---------|------|-------|
-| Hydrophilic | Pilot, Whisper, Choice PT | Torque + lubricity | Риск perforation |
-| Nitinol core | Runthrough, Asahi Prowater | Kink-resistance + гибкость | Shape memory может мешать |
-| Stainless steel | Balance Middleweight | Tactile feel + push | Хуже в извитостях |
-| Deflectable tip | Venture, Steer-It | Управляемость кончиком | Сложнее в обращении |
-
-### Серия CardioBeat / dragoncathx
-
-Образовательный контент по интервенционной кардиологии. Парные заметки по коронарным проекциям: [[Коронарная_анатомия_RAO_caudal]] · [[Коронарная_анатомия_LAO_cranial]] · [[Коронарная_анатомия_AP_caudal]] · [[Коронарная_анатомия_LAO_caudal]] · [[Коронарная_анатомия_AP_cranial]] · [[Коронарная_анатомия_RAO_cranial]] · [[Коронарная_анатомия_RAO_RCA]]
+| Hydrophilic | Choice PT, Whisper, Pilot | Низкое трение, lubricity | Риск диссекции / perforation |
+| Nitinol core | Runthrough, Asahi Prowater | Kink-resistance, извитости | Запоминает форму, слабый torque |
+| Stainless steel | Balance Middleweight | Tactile feel, передача torque | Хуже в острых углах |
+| Deflectable tip | Venture, Steer-It | Управление кончиком | Крупные артерии, сложнее в работе |
