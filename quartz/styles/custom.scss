@@ -1,3 +1,248 @@
 @use "./variables.scss" as *;
 
-// put your custom CSS here!
+// ── Design tokens ──────────────────────────────────────────────
+:root {
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --card-bg: color-mix(in srgb, var(--light) 88%, white);
+  --card-border: color-mix(in srgb, var(--lightgray) 70%, transparent);
+  --card-shadow: 0 1px 3px rgba(30, 50, 60, 0.06), 0 4px 12px rgba(30, 50, 60, 0.04);
+  --card-shadow-hover: 0 4px 16px rgba(30, 77, 99, 0.12), 0 8px 24px rgba(30, 77, 99, 0.06);
+  --accent-gradient: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--secondary) 12%, transparent),
+    color-mix(in srgb, var(--tertiary) 10%, transparent)
+  );
+}
+
+// ── Page background ────────────────────────────────────────────
+body {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, color-mix(in srgb, var(--tertiary) 8%, transparent), transparent),
+    var(--light);
+}
+
+// ── Sidebar branding ───────────────────────────────────────────
+.page-title {
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  margin-bottom: 0.25rem;
+
+  a {
+    background: none !important;
+    padding: 0 !important;
+    color: var(--dark) !important;
+    font-weight: $boldWeight;
+
+    &:hover {
+      color: var(--secondary) !important;
+    }
+  }
+}
+
+.sidebar.left {
+  border-right: 1px solid color-mix(in srgb, var(--lightgray) 60%, transparent);
+}
+
+// ── Article typography ─────────────────────────────────────────
+.center > article {
+  max-width: 42rem;
+
+  h1 {
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+  }
+
+  h2 {
+    margin-top: 2rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--lightgray) 50%, transparent);
+    letter-spacing: -0.02em;
+  }
+
+  h3 {
+    color: var(--secondary);
+    margin-top: 1.5rem;
+  }
+
+  hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--lightgray),
+      transparent
+    );
+    margin: 2rem 0;
+  }
+
+  table {
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1px solid var(--card-border);
+    box-shadow: var(--card-shadow);
+
+    th {
+      background: color-mix(in srgb, var(--secondary) 8%, var(--light));
+      color: var(--dark);
+      font-weight: $semiBoldWeight;
+    }
+
+    tr:nth-child(even) td {
+      background: color-mix(in srgb, var(--highlight) 50%, transparent);
+    }
+  }
+
+  blockquote {
+    border-radius: var(--radius-sm);
+    border-left-width: 3px;
+    border-left-color: var(--tertiary);
+    background: color-mix(in srgb, var(--tertiary) 6%, var(--light));
+  }
+}
+
+// ── Homepage layout ────────────────────────────────────────────
+body[data-slug="index"] {
+  .center > article {
+    max-width: 52rem;
+  }
+
+  // hide duplicate "Привет!" — title already shown in header
+  article > h1#привет {
+    display: none;
+  }
+
+  article > p:first-of-type {
+    font-size: 1.15rem;
+    line-height: 1.65;
+    color: var(--darkgray);
+    margin-bottom: 0.5rem;
+  }
+
+  article > h2 {
+    border-bottom: none;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gray);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  // card grid from markdown list
+  article > ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0.85rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+
+    li {
+      margin: 0;
+    }
+
+    a.internal {
+      display: block;
+      padding: 1.1rem 1.25rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--card-shadow);
+      line-height: 1.45;
+      font-size: 0.95rem;
+      font-weight: $semiBoldWeight;
+      color: var(--dark) !important;
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--card-shadow-hover);
+        border-color: color-mix(in srgb, var(--tertiary) 50%, var(--lightgray));
+        color: var(--secondary) !important;
+      }
+    }
+  }
+
+  // tip callout on homepage
+  .callout[data-callout="tip"] {
+    margin-top: 1.5rem;
+    border-radius: var(--radius-md);
+    background: var(--accent-gradient);
+    border: 1px solid color-mix(in srgb, var(--tertiary) 25%, var(--lightgray));
+  }
+}
+
+// ── Explorer tree ──────────────────────────────────────────────
+.explorer {
+  h2 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--gray);
+  }
+}
+
+// ── TOC sidebar ────────────────────────────────────────────────
+.toc {
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--card-bg) 60%, transparent);
+  border: 1px solid var(--card-border);
+  padding: 0.75rem 1rem;
+
+  .toc-header h3 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--gray);
+  }
+}
+
+// ── Search & toolbar buttons ───────────────────────────────────
+.search-button,
+.darkmode,
+.readermode {
+  border-radius: var(--radius-sm) !important;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: color-mix(in srgb, var(--highlight) 80%, transparent);
+  }
+}
+
+// ── Content meta (date, reading time) ──────────────────────────
+.content-meta {
+  color: var(--gray);
+  font-size: 0.85rem;
+}
+
+// ── Article title on content pages ─────────────────────────────
+.article-title h1 {
+  letter-spacing: -0.03em;
+}
+
+// ── Images in notes ────────────────────────────────────────────
+article img {
+  border-radius: var(--radius-sm);
+  box-shadow: var(--card-shadow);
+}
+
+// ── Dark mode adjustments ──────────────────────────────────────
+:root[saved-theme="dark"] {
+  --card-bg: color-mix(in srgb, var(--light) 95%, white);
+  --card-border: color-mix(in srgb, var(--lightgray) 40%, transparent);
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15);
+  --card-shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.2);
+
+  body {
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, color-mix(in srgb, var(--tertiary) 6%, transparent), transparent),
+      var(--light);
+  }
+}
