@@ -154,15 +154,29 @@ body {
 }
 
 .projection-card {
-  display: none;
-  animation: fadeIn 0.3s ease;
-}
-.projection-card.active {
   display: block;
 }
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
+
+.js-error {
+  margin: 24px 16px;
+  padding: 16px 18px;
+  background: rgba(255,107,107,0.1);
+  border: 1px solid rgba(255,107,107,0.35);
+  border-radius: var(--radius);
+  color: #ffb4b4;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.noscript-msg {
+  margin: 24px 16px;
+  padding: 16px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
 }
 
 .card-title {
@@ -995,7 +1009,12 @@ footer a { color: var(--accent); text-decoration: none; }
   </div>
 </div>
 
+<noscript>
+  <p class="noscript-msg">Справочник требует JavaScript. На iPhone откройте файл в <strong>Safari</strong> (Поделиться → «Открыть в Safari»), а не в предпросмотре.</p>
+</noscript>
+
 <div class="content-wrap">
+  <div id="jsError" class="js-error" hidden></div>
   <div id="cards"></div>
 
   <div class="nav-btns">
@@ -1011,142 +1030,169 @@ footer a { color: var(--accent); text-decoration: none; }
 </footer>
 
 <script>
-const DATA = JSON.parse(document.getElementById('data').textContent);
-const COMPARE = JSON.parse(document.getElementById('compare-data').textContent);
-let currentIdx = 0;
-const siteHeader = document.getElementById('siteHeader');
-const scrollStatus = document.getElementById('scrollStatus');
-let shrinkActive = false;
-const SCROLL_SHOW = 72;
-const SCROLL_HIDE = 12;
-
-function setShrink(on) {
-  if (shrinkActive === on) return;
-  shrinkActive = on;
-  siteHeader.classList.toggle('compact', on);
-}
-
-function updateScrollStatus() {
-  const p = DATA[currentIdx];
-  scrollStatus.textContent = p ? (p.short_ru || p.short) : '';
-}
-
-const tabsLca = document.getElementById('tabs-lca');
-const tabsRca = document.getElementById('tabs-rca');
-DATA.forEach((p, i) => {
-  const btn = document.createElement('button');
-  btn.className = 'tab-btn';
-  btn.textContent = p.short_ru || p.short;
-  btn.classList.add(p.system === 'ПКА' ? 'tab-rca' : 'tab-lca');
-  btn.dataset.idx = i;
-  btn.onclick = () => show(i);
-  (p.system === 'ПКА' ? tabsRca : tabsLca).appendChild(btn);
-});
-
-const groupDefs = [
-  { id: 'lca_caudal', title: 'Caudal-проекции (ЛКА)', ids: ['rao_caudal','ap_caudal','lao_caudal'] },
-  { id: 'lca_cranial', title: 'Cranial-проекции (ЛКА)', ids: ['rao_cranial','lao_cranial','ap_cranial'] },
-  { id: 'rca', title: 'Проекции ПКА', ids: ['lao_rca','rao_rca'] }
-];
-
-const cardsEl = document.getElementById('cards');
-DATA.forEach((p, i) => {
-  const card = document.createElement('div');
-  card.className = 'projection-card';
-  card.id = 'card-' + p.id;
-  card.dataset.idx = i;
-  const isRCA = p.system === 'ПКА';
-  const labelsHTML = p.labels.map(l => `<div class="label-chip"><span class="abbr">${l[0]}</span><span class="ru">${l[1]}</span></div>`).join('');
-  const usesHTML = p.uses.map(u => `<li>${u}</li>`).join('');
-  card.innerHTML = `
-    <div class="card-title">${p.short_ru ? p.short_ru + ' / ' : ''}${p.title}</div>
-    <div class="card-full-name">${p.fullname_ru ? p.fullname_ru + ' · ' : ''}${p.fullname}<span class="vessel-type${isRCA ? ' rca' : ''}">${p.system}</span></div>
-    <div class="angio-frame"><img src="${p.img}" alt="${p.title} annotated angiogram" loading="lazy"></div>
-    <div class="card-desc">
-      <div class="label">Что видно</div>
-      <ul>${p.desc.map(d => `<li>${d}</li>`).join('')}</ul>
-    </div>
-    <div class="labels-section">
-      <div class="section-title">Метки на ангиограмме</div>
-      <div class="labels-grid">${labelsHTML}</div>
-    </div>
-    <div class="clinical">
-      <div class="section-title">Клиническая заметка</div>
-      <p>${p.clinical}</p>
-      <ul class="uses">${usesHTML}</ul>
-    </div>
-    <div class="cheat">📝 ${p.cheat}</div>
-  `;
-  cardsEl.appendChild(card);
-});
-
-const compareEl = document.getElementById('compareArea');
-Object.keys(COMPARE).forEach(key => {
-  const c = COMPARE[key];
-  const sec = document.createElement('div');
-  sec.className = 'compare-section';
-  sec.id = 'compare-' + key;
-  const rowsHTML = c.rows.map(row => {
-    const cells = row.map((cell, ci) => {
-      let cls = '';
-      if (ci > 0) {
-        if (cell.includes('✅✅')) cls = 'best';
-        else if (cell.includes('✅')) cls = 'good';
-        else if (cell.includes('⚠️')) cls = 'mid';
-        else if (cell.includes('—')) cls = 'bad';
-      }
-      return `<td class="${cls}">${cell}</td>`;
-    }).join('');
-    return `<tr>${cells}</tr>`;
-  }).join('');
-  sec.innerHTML = `
-    <h3>${c.title}</h3>
-    <table class="compare-table">
-      <thead><tr>${c.headers.map(h => `<th>${h}</th>`).join('')}</tr></thead>
-      <tbody>${rowsHTML}</tbody>
-    </table>
-  `;
-  compareEl.appendChild(sec);
-});
-
-function show(idx, doScroll) {
-  currentIdx = idx;
-  document.querySelectorAll('.projection-card').forEach((c, i) => c.classList.toggle('active', i === idx));
-  document.querySelectorAll('.tab-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
-  document.querySelectorAll('.compare-section').forEach(s => s.classList.remove('active'));
-  const p = DATA[idx];
-  const myGroups = groupDefs.filter(g => g.ids.includes(p.id));
-  myGroups.forEach(g => document.getElementById('compare-' + g.id)?.classList.add('active'));
-  if (myGroups.length === 0) {
-    const allP = groupDefs.find(g => g.ids.includes(p.id));
-    if (allP) document.getElementById('compare-' + allP.id)?.classList.add('active');
+(function () {
+  function showError(msg) {
+    var box = document.getElementById('jsError');
+    if (!box) return;
+    box.hidden = false;
+    box.textContent = msg;
   }
-  document.getElementById('prevBtn').disabled = idx === 0;
-  document.getElementById('nextBtn').disabled = idx === DATA.length - 1;
-  document.getElementById('topPrev').disabled = idx === 0;
-  document.getElementById('topNext').disabled = idx === DATA.length - 1;
-  if (doScroll !== false) window.scrollTo({ top: 0, behavior: 'smooth' });
-  updateScrollStatus();
-}
 
-function navigate(dir, scrollTo) {
-  const next = currentIdx + dir;
-  if (next >= 0 && next < DATA.length) show(next, scrollTo);
-}
+  try {
+    var dataEl = document.getElementById('data');
+    var compareElJson = document.getElementById('compare-data');
+    if (!dataEl || !compareElJson) {
+      showError('Не найдены данные справочника. Переоткройте файл в Safari.');
+      return;
+    }
 
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowLeft') navigate(-1, true);
-  if (e.key === 'ArrowRight') navigate(1, true);
-});
+    var DATA = JSON.parse(dataEl.textContent);
+    var COMPARE = JSON.parse(compareElJson.textContent);
+    var currentIdx = 0;
+    var siteHeader = document.getElementById('siteHeader');
+    var scrollStatus = document.getElementById('scrollStatus');
+    var shrinkActive = false;
+    var SCROLL_SHOW = 72;
+    var SCROLL_HIDE = 12;
 
-function onScroll() {
-  if (!shrinkActive && window.scrollY > SCROLL_SHOW) setShrink(true);
-  else if (shrinkActive && window.scrollY < SCROLL_HIDE) setShrink(false);
-}
-window.addEventListener('scroll', onScroll, { passive: true });
+    var groupDefs = [
+      { id: 'lca_caudal', title: 'Caudal-проекции (ЛКА)', ids: ['rao_caudal','ap_caudal','lao_caudal'] },
+      { id: 'lca_cranial', title: 'Cranial-проекции (ЛКА)', ids: ['rao_cranial','lao_cranial','ap_cranial'] },
+      { id: 'rca', title: 'Проекции ПКА', ids: ['lao_rca','rao_rca'] }
+    ];
 
-show(0);
-onScroll();
+    function setShrink(on) {
+      if (shrinkActive === on) return;
+      shrinkActive = on;
+      siteHeader.classList.toggle('compact', on);
+    }
+
+    function updateScrollStatus() {
+      var p = DATA[currentIdx];
+      scrollStatus.textContent = p ? (p.short_ru || p.short) : '';
+    }
+
+    var cardsEl = document.getElementById('cards');
+    var compareArea = document.getElementById('compareArea');
+
+    function renderCard(p) {
+      var isRCA = p.system === 'ПКА';
+      var labelsHTML = p.labels.map(function (l) {
+        return '<div class="label-chip"><span class="abbr">' + l[0] + '</span><span class="ru">' + l[1] + '</span></div>';
+      }).join('');
+      var usesHTML = p.uses.map(function (u) { return '<li>' + u + '</li>'; }).join('');
+      var descHTML = p.desc.map(function (d) { return '<li>' + d + '</li>'; }).join('');
+
+      cardsEl.innerHTML =
+        '<div class="projection-card" id="card-' + p.id + '">' +
+          '<div class="card-title">' + (p.short_ru ? p.short_ru + ' / ' : '') + p.title + '</div>' +
+          '<div class="card-full-name">' + (p.fullname_ru ? p.fullname_ru + ' · ' : '') + p.fullname +
+            '<span class="vessel-type' + (isRCA ? ' rca' : '') + '">' + p.system + '</span></div>' +
+          '<div class="angio-frame"><img src="' + p.img + '" alt="' + p.title + ' annotated angiogram" decoding="async"></div>' +
+          '<div class="card-desc"><div class="label">Что видно</div><ul>' + descHTML + '</ul></div>' +
+          '<div class="labels-section"><div class="section-title">Метки на ангиограмме</div><div class="labels-grid">' + labelsHTML + '</div></div>' +
+          '<div class="clinical"><div class="section-title">Клиническая заметка</div><p>' + p.clinical + '</p><ul class="uses">' + usesHTML + '</ul></div>' +
+          '<div class="cheat">📝 ' + p.cheat + '</div>' +
+        '</div>';
+    }
+
+    var tabsLca = document.getElementById('tabs-lca');
+    var tabsRca = document.getElementById('tabs-rca');
+    DATA.forEach(function (p, i) {
+      var btn = document.createElement('button');
+      btn.className = 'tab-btn';
+      btn.textContent = p.short_ru || p.short;
+      btn.classList.add(p.system === 'ПКА' ? 'tab-rca' : 'tab-lca');
+      btn.dataset.idx = i;
+      btn.onclick = function () { show(i); };
+      (p.system === 'ПКА' ? tabsRca : tabsLca).appendChild(btn);
+    });
+
+    Object.keys(COMPARE).forEach(function (key) {
+      var c = COMPARE[key];
+      var sec = document.createElement('div');
+      sec.className = 'compare-section';
+      sec.id = 'compare-' + key;
+      var rowsHTML = c.rows.map(function (row) {
+        var cells = row.map(function (cell, ci) {
+          var cls = '';
+          if (ci > 0) {
+            if (cell.indexOf('✅✅') !== -1) cls = 'best';
+            else if (cell.indexOf('✅') !== -1) cls = 'good';
+            else if (cell.indexOf('⚠️') !== -1) cls = 'mid';
+            else if (cell.indexOf('—') !== -1) cls = 'bad';
+          }
+          return '<td class="' + cls + '">' + cell + '</td>';
+        }).join('');
+        return '<tr>' + cells + '</tr>';
+      }).join('');
+      sec.innerHTML =
+        '<h3>' + c.title + '</h3>' +
+        '<table class="compare-table">' +
+          '<thead><tr>' + c.headers.map(function (h) { return '<th>' + h + '</th>'; }).join('') + '</tr></thead>' +
+          '<tbody>' + rowsHTML + '</tbody>' +
+        '</table>';
+      compareArea.appendChild(sec);
+    });
+
+    window.show = function (idx, doScroll) {
+      currentIdx = idx;
+      renderCard(DATA[idx]);
+
+      var tabBtns = document.querySelectorAll('.tab-btn');
+      for (var i = 0; i < tabBtns.length; i++) {
+        tabBtns[i].classList.toggle('active', i === idx);
+      }
+
+      var compareSections = document.querySelectorAll('.compare-section');
+      for (var j = 0; j < compareSections.length; j++) {
+        compareSections[j].classList.remove('active');
+      }
+
+      var p = DATA[idx];
+      var myGroups = groupDefs.filter(function (g) { return g.ids.indexOf(p.id) !== -1; });
+      myGroups.forEach(function (g) {
+        var el = document.getElementById('compare-' + g.id);
+        if (el) el.classList.add('active');
+      });
+      if (myGroups.length === 0) {
+        var allP = groupDefs.find(function (g) { return g.ids.indexOf(p.id) !== -1; });
+        if (allP) {
+          var fallback = document.getElementById('compare-' + allP.id);
+          if (fallback) fallback.classList.add('active');
+        }
+      }
+
+      document.getElementById('prevBtn').disabled = idx === 0;
+      document.getElementById('nextBtn').disabled = idx === DATA.length - 1;
+      document.getElementById('topPrev').disabled = idx === 0;
+      document.getElementById('topNext').disabled = idx === DATA.length - 1;
+      if (doScroll !== false) window.scrollTo(0, 0);
+      updateScrollStatus();
+    };
+
+    window.navigate = function (dir, scrollTo) {
+      var next = currentIdx + dir;
+      if (next >= 0 && next < DATA.length) show(next, scrollTo);
+    };
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') navigate(-1, true);
+      if (e.key === 'ArrowRight') navigate(1, true);
+    });
+
+    function onScroll() {
+      if (!shrinkActive && window.scrollY > SCROLL_SHOW) setShrink(true);
+      else if (shrinkActive && window.scrollY < SCROLL_HIDE) setShrink(false);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    show(0);
+    onScroll();
+  } catch (err) {
+    showError('Ошибка загрузки справочника. Откройте файл в Safari (не в предпросмотре). ' + (err && err.message ? err.message : ''));
+  }
+})();
 </script>
 
 </body>
