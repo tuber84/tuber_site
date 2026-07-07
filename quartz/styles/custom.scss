@@ -1,72 +1,79 @@
 @use "./variables.scss" as *;
 
+// ── Pixel Indie Game Theme ─────────────────────────────────────
+// Inspired by Celeste, Hyper Light Drifter, Transistor
+// ────────────────────────────────────────────────────────────────
+
 // ── Design tokens ──────────────────────────────────────────────
 :root {
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  --card-bg: color-mix(in srgb, var(--light) 96%, var(--secondary));
-  --card-border: color-mix(in srgb, var(--lightgray) 80%, transparent);
-  --card-shadow: 0 4px 20px rgba(85, 112, 90, 0.05), 0 1px 3px rgba(85, 112, 90, 0.03);
-  --card-shadow-hover: 0 10px 30px rgba(85, 112, 90, 0.12), 0 2px 8px rgba(85, 112, 90, 0.06);
-  --accent-gradient: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--secondary) 8%, transparent),
-    color-mix(in srgb, var(--tertiary) 8%, transparent)
-  );
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --card-bg: color-mix(in srgb, var(--light) 90%, var(--secondary));
+  --card-border: color-mix(in srgb, var(--lightgray) 90%, var(--secondary));
+  --card-shadow: 0 2px 0 rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2);
+  --card-shadow-hover: 0 2px 0 var(--secondary), 0 4px 20px rgba(233, 69, 96, 0.25);
+  --neon-glow: 0 0 8px rgba(233, 69, 96, 0.4), 0 0 24px rgba(233, 69, 96, 0.15);
+  --cyan-glow: 0 0 8px rgba(0, 210, 211, 0.4), 0 0 24px rgba(0, 210, 211, 0.15);
 }
 
-// ── Scrollbar styling ──────────────────────────────────────────
+// ── Custom scrollbar ───────────────────────────────────────────
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--light);
 }
 ::-webkit-scrollbar-thumb {
-  background: color-mix(in srgb, var(--lightgray) 80%, transparent);
-  border-radius: 4px;
+  background: var(--secondary);
+  border-radius: 0;
   &:hover {
-    background: color-mix(in srgb, var(--gray) 80%, transparent);
+    background: var(--tertiary);
   }
 }
 
 // ── Page background ────────────────────────────────────────────
 body {
-  background:
-    radial-gradient(circle at 10% 20%, color-mix(in srgb, var(--secondary) 4%, transparent) 0%, transparent 40%),
-    radial-gradient(circle at 90% 80%, color-mix(in srgb, var(--tertiary) 4%, transparent) 0%, transparent 40%),
-    var(--light);
-  background-attachment: fixed;
+  background: var(--light);
+  // subtle noise texture via CSS
+  &::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
 }
 
-// ── Sidebar glassmorphism ──────────────────────────────────────
+// ── Sidebar ────────────────────────────────────────────────────
 .sidebar.left {
-  background: color-mix(in srgb, var(--light) 75%, transparent) !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-right: 1px solid color-mix(in srgb, var(--lightgray) 40%, transparent) !important;
-  padding: 1.5rem 1rem;
+  border-right: 2px solid var(--card-border) !important;
 }
 
-// ── Sidebar branding ───────────────────────────────────────────
+// ── Page title (site branding) ─────────────────────────────────
 .page-title {
-  font-family: var(--headerFont);
-  font-size: 1.3rem;
-  letter-spacing: -0.01em;
-  line-height: 1.3;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
   margin-bottom: 0.5rem;
 
   a {
     background: none !important;
     padding: 0 !important;
-    color: var(--dark) !important;
+    color: var(--secondary) !important;
     font-weight: 700;
-    transition: color 0.2s ease;
+    transition: all 0.15s ease;
+    text-shadow: 0 0 12px rgba(233, 69, 96, 0.3);
 
     &:hover {
-      color: var(--secondary) !important;
+      color: var(--tertiary) !important;
+      text-shadow: 0 0 16px rgba(0, 210, 211, 0.5);
     }
   }
 }
@@ -77,55 +84,77 @@ body {
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--headerFont);
-    font-weight: 600;
-    color: var(--dark);
-    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
   }
 
   h1 {
-    font-size: 2.2rem;
-    line-height: 1.25;
+    font-size: 1.8rem;
+    line-height: 1.3;
+    color: var(--secondary);
+    text-shadow: 0 0 20px rgba(233, 69, 96, 0.2);
     margin-bottom: 1.5rem;
   }
 
   h2 {
+    font-size: 1.2rem;
     margin-top: 2.5rem;
-    padding-bottom: 0.3rem;
-    border-bottom: 2px solid color-mix(in srgb, var(--secondary) 15%, transparent);
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--secondary);
+    color: var(--dark);
   }
 
   h3 {
-    color: var(--secondary);
+    font-size: 1rem;
+    color: var(--tertiary);
     margin-top: 1.8rem;
+  }
+
+  // links
+  a {
+    color: var(--secondary);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--secondary);
+    transition: all 0.15s ease;
+
+    &:hover {
+      color: var(--tertiary);
+      border-bottom-color: var(--tertiary);
+      text-shadow: 0 0 8px rgba(0, 210, 211, 0.4);
+    }
   }
 
   hr {
     border: none;
-    height: 1px;
+    height: 2px;
     background: linear-gradient(
       to right,
       transparent,
-      color-mix(in srgb, var(--lightgray) 70%, transparent),
+      var(--secondary),
+      var(--tertiary),
       transparent
     );
     margin: 2.5rem 0;
+    box-shadow: 0 0 8px rgba(233, 69, 96, 0.2);
   }
 
   table {
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-sm);
     overflow: hidden;
-    border: 1px solid var(--card-border);
+    border: 2px solid var(--card-border);
     box-shadow: var(--card-shadow);
-    margin: 1.5rem 0;
 
     th {
-      background: color-mix(in srgb, var(--secondary) 10%, var(--light));
+      background: color-mix(in srgb, var(--secondary) 15%, var(--light));
       color: var(--dark);
-      font-weight: 600;
+      font-family: var(--headerFont);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     tr:nth-child(even) td {
-      background: color-mix(in srgb, var(--highlight) 40%, transparent);
+      background: color-mix(in srgb, var(--highlight) 50%, transparent);
     }
   }
 
@@ -133,19 +162,19 @@ body {
     border-radius: var(--radius-sm);
     border-left: 4px solid var(--secondary);
     background: color-mix(in srgb, var(--secondary) 6%, var(--light));
-    color: var(--darkgray);
     padding: 0.8rem 1.2rem;
-    font-style: italic;
-    margin: 1.5rem 0;
+    box-shadow: inset 0 0 12px rgba(233, 69, 96, 0.05);
   }
 
+  // inline code as pixel badges
   code {
     font-family: var(--codeFont);
     font-size: 0.85em;
-    background: color-mix(in srgb, var(--lightgray) 50%, transparent);
-    padding: 0.15rem 0.4rem;
-    border-radius: 6px;
-    color: var(--tertiary);
+    background: color-mix(in srgb, var(--secondary) 10%, var(--light));
+    padding: 0.15rem 0.45rem;
+    border-radius: 2px;
+    border: 1px solid color-mix(in srgb, var(--secondary) 25%, transparent);
+    color: var(--secondary);
   }
 }
 
@@ -155,14 +184,13 @@ body[data-slug="index"] {
     max-width: 54rem;
   }
 
-  // Hide duplicate title
   article > h1#привет,
   article > h1:first-of-type {
     display: none;
   }
 
   article > p:first-of-type {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     line-height: 1.7;
     color: var(--darkgray);
     margin-bottom: 1.5rem;
@@ -170,113 +198,160 @@ body[data-slug="index"] {
 
   article > h2 {
     border-bottom: none;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--gray);
+    letter-spacing: 0.12em;
+    color: var(--tertiary);
     margin-top: 2.5rem;
     margin-bottom: 1rem;
+    // pixel-style "section label"
+    &::before {
+      content: "▸ ";
+      color: var(--secondary);
+    }
   }
 
   .home-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.2rem;
+    gap: 1rem;
     margin: 0 0 2rem;
   }
 
+  // Cards styled like game UI inventory slots
   .home-card {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 1.25rem;
-    background: color-mix(in srgb, var(--light) 50%, var(--lightgray));
-    border: 1px solid var(--card-border);
-    border-radius: var(--radius-md);
+    padding: 1rem 1.15rem;
+    background: var(--card-bg);
+    border: 2px solid var(--card-border);
+    border-radius: var(--radius-sm);
     box-shadow: var(--card-shadow);
     text-decoration: none;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.15s ease;
+    position: relative;
+    overflow: hidden;
+
+    // subtle gradient stripe at top
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--secondary), var(--tertiary));
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
 
     &:hover {
-      transform: translateY(-3px);
+      border-color: var(--secondary);
       box-shadow: var(--card-shadow-hover);
-      border-color: color-mix(in srgb, var(--secondary) 60%, transparent);
-      background: color-mix(in srgb, var(--light) 90%, var(--secondary));
+      transform: translateY(-2px);
+
+      &::before {
+        opacity: 1;
+      }
+
+      .home-card-icon {
+        border-color: var(--secondary);
+        box-shadow: var(--neon-glow);
+        color: var(--secondary);
+      }
 
       .home-card-title {
         color: var(--secondary);
+        text-shadow: 0 0 8px rgba(233, 69, 96, 0.3);
       }
     }
   }
 
   .home-card-icon {
     flex-shrink: 0;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     line-height: 1;
-    width: 3rem;
-    height: 3rem;
+    width: 2.75rem;
+    height: 2.75rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: color-mix(in srgb, var(--secondary) 8%, var(--light));
-    border-radius: 12px;
-    border: 1px solid color-mix(in srgb, var(--secondary) 15%, transparent);
+    background: color-mix(in srgb, var(--lightgray) 50%, var(--light));
+    border: 2px solid var(--card-border);
+    border-radius: var(--radius-sm);
+    transition: all 0.15s ease;
   }
 
   .home-card-body {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.2rem;
     min-width: 0;
   }
 
   .home-card-title {
-    font-size: 1rem;
-    font-weight: 600;
+    font-family: var(--headerFont);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
     color: var(--dark);
     line-height: 1.35;
-    transition: color 0.2s ease;
+    transition: all 0.15s ease;
   }
 
   .home-card-desc {
-    font-size: 0.85rem;
-    color: var(--darkgray);
+    font-size: 0.82rem;
+    color: var(--gray);
     line-height: 1.45;
   }
 
   .callout[data-callout="tip"] {
     margin-top: 2rem;
-    border-radius: var(--radius-md);
-    background: var(--accent-gradient);
-    border: 1px solid color-mix(in srgb, var(--secondary) 20%, transparent);
+    border-radius: var(--radius-sm);
+    border: 2px solid color-mix(in srgb, var(--tertiary) 40%, var(--lightgray));
+    background: color-mix(in srgb, var(--tertiary) 6%, var(--light));
+
+    &::before {
+      content: "";
+      display: block;
+      height: 2px;
+      background: linear-gradient(90deg, var(--tertiary), transparent);
+    }
   }
 }
 
 // ── Explorer tree ──────────────────────────────────────────────
 .explorer {
   h2 {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     color: var(--gray);
+
+    &::before {
+      content: "// ";
+      color: var(--secondary);
+      opacity: 0.6;
+    }
   }
 }
 
 // ── TOC sidebar ────────────────────────────────────────────────
 .toc {
-  background: color-mix(in srgb, var(--light) 75%, transparent) !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--card-border);
+  background: var(--card-bg);
   box-shadow: var(--card-shadow);
-  padding: 1rem;
+  padding: 0.75rem 1rem;
 
   .toc-header h3 {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     color: var(--gray);
+    font-family: var(--headerFont);
   }
 }
 
@@ -285,41 +360,46 @@ body[data-slug="index"] {
 .darkmode,
 .readermode {
   border-radius: var(--radius-sm) !important;
-  transition: background 0.15s ease;
+  border: 1px solid transparent !important;
+  transition: all 0.15s ease;
 
   &:hover {
-    background: color-mix(in srgb, var(--highlight) 80%, transparent);
+    border-color: var(--secondary) !important;
+    box-shadow: 0 0 8px rgba(233, 69, 96, 0.2);
   }
 }
 
-// ── Content meta (date, reading time) ──────────────────────────
+// ── Content meta ───────────────────────────────────────────────
 .content-meta {
   color: var(--gray);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+  font-family: var(--codeFont);
 }
 
-// ── Article title on content pages ─────────────────────────────
+// ── Article title ──────────────────────────────────────────────
 .article-title h1 {
-  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
-// ── Images in notes ────────────────────────────────────────────
+// ── Images ─────────────────────────────────────────────────────
 article img {
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--card-border);
   box-shadow: var(--card-shadow);
+}
+
+// ── Selection color ────────────────────────────────────────────
+::selection {
+  background: color-mix(in srgb, var(--secondary) 30%, transparent);
+  color: var(--dark);
 }
 
 // ── Dark mode adjustments ──────────────────────────────────────
 :root[saved-theme="dark"] {
-  --card-bg: color-mix(in srgb, var(--light) 96%, var(--secondary));
-  --card-border: color-mix(in srgb, var(--lightgray) 50%, transparent);
-  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.15);
-  --card-shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
-
-  body {
-    background:
-      radial-gradient(circle at 10% 20%, color-mix(in srgb, var(--secondary) 6%, transparent) 0%, transparent 40%),
-      radial-gradient(circle at 90% 80%, color-mix(in srgb, var(--tertiary) 6%, transparent) 0%, transparent 40%),
-      var(--light);
-  }
+  --card-bg: color-mix(in srgb, var(--light) 90%, var(--lightgray));
+  --card-border: color-mix(in srgb, var(--lightgray) 90%, var(--secondary));
+  --card-shadow: 0 2px 0 rgba(0, 0, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.4);
+  --card-shadow-hover: 0 2px 0 var(--secondary), 0 4px 24px rgba(233, 69, 96, 0.3);
+  --neon-glow: 0 0 10px rgba(233, 69, 96, 0.5), 0 0 30px rgba(233, 69, 96, 0.2);
 }

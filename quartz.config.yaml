@@ -16,30 +16,30 @@ configuration:
     fontOrigin: googleFonts
     cdnCaching: true
     typography:
-      header: Lora
+      header: Space Mono
       body: Inter
-      code: IBM Plex Mono
+      code: JetBrains Mono
     colors:
       lightMode:
-        light: "#fcfbf9"
-        lightgray: "#e8e4dc"
-        gray: "#a39e93"
-        darkgray: "#5c5852"
-        dark: "#2e2b2a"
-        secondary: "#55705a"
-        tertiary: "#8c6b4a"
-        highlight: "rgba(85, 112, 90, 0.12)"
-        textHighlight: "#dfd6c6"
+        light: "#f0e6ef"
+        lightgray: "#d4c5d9"
+        gray: "#8a7a8f"
+        darkgray: "#3d2e42"
+        dark: "#1a1a2e"
+        secondary: "#e94560"
+        tertiary: "#0f3460"
+        highlight: "rgba(233, 69, 96, 0.10)"
+        textHighlight: "#e9456033"
       darkMode:
-        light: "#1a1c1a"
-        lightgray: "#2d302c"
-        gray: "#7a7f78"
-        darkgray: "#d0d6ce"
-        dark: "#f4f7f2"
-        secondary: "#88a88e"
-        tertiary: "#c29a76"
-        highlight: "rgba(136, 168, 142, 0.15)"
-        textHighlight: "#424840"
+        light: "#16162a"
+        lightgray: "#252545"
+        gray: "#6b6b8a"
+        darkgray: "#d4d4ec"
+        dark: "#f0e6ff"
+        secondary: "#e94560"
+        tertiary: "#00d2d3"
+        highlight: "rgba(233, 69, 96, 0.12)"
+        textHighlight: "#e9456022"
 plugins:
   - source: github:quartz-community/created-modified-date
     enabled: true
