@@ -16,30 +16,30 @@ configuration:
     fontOrigin: googleFonts
     cdnCaching: true
     typography:
-      header: JetBrains Mono
+      header: Plus Jakarta Sans
       body: Inter
       code: JetBrains Mono
     colors:
       lightMode:
-        light: "#fdf6e3"
-        lightgray: "#e6e2cc"
-        gray: "#939f91"
-        darkgray: "#5c6a72"
-        dark: "#2f383e"
-        secondary: "#8da101"
-        tertiary: "#35a77c"
-        highlight: "rgba(141, 161, 1, 0.08)"
-        textHighlight: "#dfa00033"
+        light: "#ffffff"
+        lightgray: "#f4f4f5"
+        gray: "#a1a1aa"
+        darkgray: "#3f3f46"
+        dark: "#09090b"
+        secondary: "#0284c7"
+        tertiary: "#0ea5e9"
+        highlight: "rgba(2, 132, 199, 0.1)"
+        textHighlight: "rgba(14, 165, 233, 0.2)"
       darkMode:
-        light: "#2d353b"
-        lightgray: "#3d484d"
-        gray: "#7a8478"
-        darkgray: "#9da9a0"
-        dark: "#d3c6aa"
-        secondary: "#a7c080"
-        tertiary: "#7fbbb3"
-        highlight: "rgba(167, 192, 128, 0.08)"
-        textHighlight: "#dbbc7f33"
+        light: "#09090b"
+        lightgray: "#18181b"
+        gray: "#71717a"
+        darkgray: "#a1a1aa"
+        dark: "#f4f4f5"
+        secondary: "#06b6d4"
+        tertiary: "#6366f1"
+        highlight: "rgba(6, 182, 212, 0.15)"
+        textHighlight: "rgba(99, 102, 241, 0.3)"
 plugins:
   - source: github:quartz-community/created-modified-date
     enabled: true

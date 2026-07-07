@@ -1,356 +1,479 @@
 @use "./variables.scss" as *;
 
-// ── Vim / Everforest Theme ─────────────────────────────────────
-// A nature-inspired retro-monochrome / Vim editor aesthetic
-// ────────────────────────────────────────────────────────────────
+// ── Premium Modern Tech / Medical Theme ────────────────────────────
+// Inspired by Vercel, Linear, and modern high-end medical software
+// ──────────────────────────────────────────────────────────────────
 
 :root {
-  --radius-sm: 4px;
-  --radius-md: 4px;
-  --radius-lg: 4px;
-  --card-bg: transparent;
-  --card-border: var(--lightgray);
-  --card-shadow: none;
-  --card-shadow-hover: none;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  --card-shadow-hover: 0 8px 32px rgba(6, 182, 212, 0.15);
+}
+
+:root[saved-theme="light"] {
+  --card-bg: rgba(255, 255, 255, 0.6);
+  --card-border: rgba(0, 0, 0, 0.06);
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  --card-shadow-hover: 0 8px 32px rgba(2, 132, 199, 0.12);
 }
 
 // ── Scrollbar ──────────────────────────────────────────────────
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--light);
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
   background: var(--lightgray);
-  border-radius: 0;
-  &:hover {
-    background: var(--gray);
-  }
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gray);
 }
 
-// ── Page background ────────────────────────────────────────────
+// ── Global Body & Glow ─────────────────────────────────────────
 body {
   background: var(--light);
   color: var(--darkgray);
+  font-family: var(--bodyFont);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-// ── Sidebar (Vim Split View) ───────────────────────────────────
+// Add a very subtle radial gradient glow in dark mode
+:root[saved-theme="dark"] body {
+  background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.08) 0%, rgba(6, 182, 212, 0.03) 40%, var(--light) 100%);
+  background-attachment: fixed;
+}
+
+// ── Glassmorphism Sidebar ──────────────────────────────────────
 .sidebar.left {
-  background: var(--light) !important;
-  border-right: 1px solid var(--lightgray) !important;
-  padding: 1.5rem 1rem;
+  padding: 1.5rem 1.2rem;
+  background: rgba(9, 9, 11, 0.4) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-right: 1px solid var(--card-border) !important;
+  z-index: 10;
 }
 
-// ── Page title (Branding as statusline) ────────────────────────
+:root[saved-theme="light"] .sidebar.left {
+  background: rgba(255, 255, 255, 0.6) !important;
+}
+
+// ── Page Title ─────────────────────────────────────────────────
 .page-title {
   font-family: var(--headerFont);
-  font-size: 1rem;
-  text-transform: lowercase;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
 
   a {
-    background: none !important;
+    font-weight: 800;
+    transition: all 0.3s ease;
+    color: var(--dark) !important;
+    background: transparent !important;
     padding: 0 !important;
-    color: var(--secondary) !important;
-    font-weight: 700;
-    transition: color 0.15s ease;
-
-    &::before {
-      content: " "; // Vim logo icon or custom symbol if font supports, else fallback to standard cursor block
-    }
     
+    // Gradient text for the logo
+    background: linear-gradient(90deg, var(--secondary), var(--tertiary)) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+
     &:hover {
-      color: var(--tertiary) !important;
+      opacity: 0.8;
     }
   }
 }
 
-// ── Article typography ─────────────────────────────────────────
+// ── Main Article & Typography ──────────────────────────────────
 .center > article {
-  max-width: 44rem;
+  max-width: 48rem;
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--headerFont);
     color: var(--dark);
+    letter-spacing: -0.02em;
     font-weight: 700;
-    letter-spacing: -0.01em;
   }
 
   h1 {
-    font-size: 1.8rem;
-    line-height: 1.3;
+    font-size: 2.2rem;
+    line-height: 1.2;
     margin-bottom: 1.5rem;
-    border-bottom: 1px solid var(--lightgray);
     padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--card-border);
   }
 
   h2 {
-    font-size: 1.3rem;
-    margin-top: 2.2rem;
-    padding-bottom: 0.2rem;
-    border-bottom: 1px dashed var(--lightgray);
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    padding-bottom: 0.3rem;
   }
 
   h3 {
-    font-size: 1.1rem;
-    color: var(--secondary);
-    margin-top: 1.8rem;
+    font-size: 1.25rem;
+    color: var(--dark);
+    margin-top: 2rem;
   }
 
   // Links
   a {
-    color: var(--tertiary);
+    color: var(--secondary);
     text-decoration: none;
-    border-bottom: 1px solid var(--lightgray);
-    transition: all 0.15s ease;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease;
+    font-weight: 500;
 
     &:hover {
-      color: var(--secondary);
-      border-bottom-color: var(--secondary);
-      background: var(--highlight);
+      color: var(--tertiary);
+      border-bottom-color: var(--tertiary);
+      text-shadow: 0 0 12px var(--highlight);
     }
   }
 
   hr {
+    background: var(--card-border);
     border: none;
     height: 1px;
-    background: var(--lightgray);
-    margin: 2.5rem 0;
+    margin: 3rem 0;
   }
 
+  // Tables
   table {
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--card-border);
+    margin: 2rem 0;
     overflow: hidden;
-    border: 1px solid var(--lightgray);
-    margin: 1.5rem 0;
+    border-collapse: collapse;
+    box-shadow: var(--card-shadow);
 
     th {
       background: var(--lightgray);
       color: var(--dark);
       font-family: var(--headerFont);
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       font-weight: 600;
+      padding: 0.8rem 1rem;
+      text-align: left;
+    }
+    
+    td {
+      padding: 0.8rem 1rem;
+      border-top: 1px solid var(--card-border);
     }
 
-    tr:nth-child(even) td {
+    tr:nth-child(2n) td {
       background: var(--highlight);
     }
   }
 
+  // Blockquotes
   blockquote {
-    border-radius: var(--radius-sm);
-    border-left: 3px solid var(--secondary);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    border-left: 4px solid var(--secondary);
     background: var(--highlight);
     color: var(--darkgray);
-    padding: 0.8rem 1.2rem;
-    margin: 1.5rem 0;
-    font-style: italic;
+    margin: 2rem 0;
+    padding: 1.2rem 1.5rem;
+    font-style: normal;
+    box-shadow: inset 20px 0 20px -20px rgba(0,0,0,0.05);
   }
 
-  // Code styling
+  // Inline Code
   code {
     font-family: var(--codeFont);
     font-size: 0.85em;
     background: var(--lightgray);
-    padding: 0.15rem 0.35rem;
-    border-radius: var(--radius-sm);
-    color: color-mix(in srgb, var(--dark) 80%, var(--secondary));
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    color: var(--secondary);
+    border: 1px solid var(--card-border);
   }
 
+  // Code Blocks
   pre {
-    border: 1px solid var(--lightgray);
-    border-radius: var(--radius-sm);
-    background: color-mix(in srgb, var(--light) 97%, var(--lightgray));
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    background: var(--lightgray);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    padding: 1rem;
     
     code {
       background: transparent;
       padding: 0;
       color: inherit;
+      border: none;
     }
   }
 }
 
-// ── Homepage layout (Vim Dashboard) ────────────────────────────
+// ── Homepage Custom Layout ─────────────────────────────────────
 body[data-slug="index"] {
   .center > article {
-    max-width: 54rem;
-  }
-
-  article > h1#привет,
-  article > h1:first-of-type {
-    display: none;
-  }
-
-  article > p:first-of-type {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: var(--darkgray);
-    margin-bottom: 1.5rem;
-  }
-
-  article > h2 {
-    border-bottom: none;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--gray);
-    margin-top: 2.2rem;
-    margin-bottom: 1rem;
-    font-family: var(--headerFont);
+    max-width: 58rem;
     
-    &::before {
-      content: "[ ";
-      color: var(--secondary);
+    // Hide standard index heading
+    > h1:first-of-type,
+    > h1#привет {
+      display: none;
     }
-    &::after {
-      content: " ]";
-      color: var(--secondary);
+
+    // Hero description
+    > p:first-of-type {
+      color: var(--darkgray);
+      margin-bottom: 2rem;
+      font-size: 1.25rem;
+      line-height: 1.6;
+      max-width: 80%;
+    }
+
+    > h2 {
+      font-size: 1.1rem;
+      font-family: var(--headerFont);
+      border-bottom: none;
+      margin-top: 3rem;
+      margin-bottom: 1.2rem;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      
+      &:before {
+        content: "";
+        display: block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--secondary);
+        box-shadow: 0 0 10px var(--secondary);
+      }
     }
   }
 
+  // Grid for links
   .home-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1rem;
-    margin: 0 0 2rem;
+    gap: 1.2rem;
+    margin: 0 0 3rem 0;
   }
 
-  // Cards styled like Vim windows/splits
   .home-card {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
-    padding: 1rem 1.25rem;
-    background: transparent;
-    border: 1px solid var(--lightgray);
-    border-radius: var(--radius-sm);
+    padding: 1.25rem;
     text-decoration: none;
-    transition: all 0.15s ease;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--card-shadow);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 
     &:hover {
-      border-color: var(--secondary);
-      background: var(--highlight);
-      transform: none; // flat layout, no translateY
-
+      transform: translateY(-3px);
+      border-color: rgba(6, 182, 212, 0.4);
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: var(--card-shadow-hover);
+      
+      .home-card-icon {
+        background: var(--secondary);
+        color: var(--light);
+        box-shadow: 0 0 15px var(--highlight);
+      }
+      
       .home-card-title {
         color: var(--secondary);
       }
     }
   }
 
+  :root[saved-theme="light"] .home-card:hover {
+    background: rgba(255, 255, 255, 0.9);
+  }
+
   .home-card-icon {
-    flex-shrink: 0;
-    font-size: 1.4rem;
-    line-height: 1;
-    width: 2.5rem;
-    height: 2.5rem;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    width: 2.8rem;
+    height: 2.8rem;
+    flex-shrink: 0;
+    font-size: 1.3rem;
+    line-height: 1;
+    color: var(--dark);
     background: var(--lightgray);
     border-radius: var(--radius-sm);
-    color: var(--darkgray);
+    transition: all 0.3s ease;
   }
 
   .home-card-body {
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
+    gap: 0.3rem;
     min-width: 0;
   }
 
   .home-card-title {
     font-family: var(--headerFont);
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--dark);
-    line-height: 1.35;
-    transition: color 0.15s ease;
+    line-height: 1.3;
+    transition: color 0.2s ease;
   }
 
   .home-card-desc {
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     color: var(--gray);
-    line-height: 1.45;
-  }
-
-  .callout[data-callout="tip"] {
-    margin-top: 2rem;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--lightgray);
-    background: var(--highlight);
+    line-height: 1.5;
   }
 }
 
-// ── Explorer (like Neovim file tree) ───────────────────────────
+// ── Callouts ───────────────────────────────────────────────────
+.callout {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(10px);
+}
+
+// ── Explorer Sidebar Plugin ────────────────────────────────────
 .explorer {
   h2 {
-    font-size: 0.75rem;
-    text-transform: lowercase;
-    letter-spacing: 0.02em;
-    color: var(--gray);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--dark);
     font-family: var(--headerFont);
-    margin-bottom: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    opacity: 0.8;
   }
   
   .explorer-content {
-    font-family: var(--headerFont);
-    font-size: 0.85rem;
+    font-family: var(--bodyFont);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  
+  // Clean up the weird backgrounds by explicitly resetting a and li
+  ul {
+    list-style: none;
+    padding-left: 0.5rem;
+  }
+  
+  li {
+    margin-bottom: 0.2rem;
+  }
+
+  a {
+    display: block;
+    padding: 0.35rem 0.6rem;
+    border-radius: var(--radius-sm);
+    color: var(--darkgray) !important;
+    text-decoration: none !important;
+    background: transparent !important;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    
+    &:hover {
+      color: var(--dark) !important;
+      background: var(--highlight) !important;
+      border-color: rgba(6, 182, 212, 0.1);
+    }
+  }
+  
+  // Highlight currently active file if the plugin supports it via class
+  .active > a, a.active {
+    color: var(--secondary) !important;
+    background: var(--highlight) !important;
+    font-weight: 600;
+    border-color: rgba(6, 182, 212, 0.2);
   }
 }
 
-// ── TOC sidebar (like Symbols-outline) ─────────────────────────
+// ── TOC sidebar ───────────────────────────────────────────────
 .toc {
-  background: var(--light) !important;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--lightgray);
-  padding: 0.8rem;
+  background: transparent !important;
+  border-radius: var(--radius-md);
+  border: none;
+  padding: 0;
 
   .toc-header h3 {
-    font-size: 0.75rem;
-    text-transform: lowercase;
-    letter-spacing: 0.02em;
-    color: var(--gray);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--dark);
     font-family: var(--headerFont);
+    font-weight: 700;
+    opacity: 0.8;
   }
   
   ul {
-    font-family: var(--headerFont);
+    font-family: var(--bodyFont);
     font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  a {
+    padding: 0.2rem 0;
+    display: inline-block;
+    color: var(--darkgray);
+    transition: color 0.2s ease;
+    
+    &:hover {
+      color: var(--secondary);
+    }
   }
 }
 
-// ── Search & toolbar buttons ───────────────────────────────────
+// ── Search & Toolbar Buttons ───────────────────────────────────
 .search-button,
 .darkmode,
 .readermode {
   border-radius: var(--radius-sm) !important;
-  border: 1px solid transparent !important;
-  transition: all 0.15s ease;
+  border: 1px solid var(--card-border) !important;
+  background: var(--card-bg) !important;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 
   &:hover {
-    border-color: var(--lightgray) !important;
-    background: var(--lightgray) !important;
+    border-color: var(--secondary) !important;
+    background: var(--highlight) !important;
+    color: var(--secondary) !important;
   }
 }
 
-// ── Content meta ───────────────────────────────────────────────
+// ── Content Meta ───────────────────────────────────────────────
 .content-meta {
   color: var(--gray);
-  font-size: 0.8rem;
-  font-family: var(--headerFont);
+  font-size: 0.85rem;
+  font-family: var(--bodyFont);
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+  opacity: 0.8;
 }
 
-// ── Selection color ────────────────────────────────────────────
+// ── Selection Color ────────────────────────────────────────────
+// Replaced the blocky grey with a beautiful vibrant selection
 ::selection {
-  background: var(--lightgray);
+  background: rgba(99, 102, 241, 0.4);
   color: var(--dark);
 }
 
 // ── Images ─────────────────────────────────────────────────────
 article img {
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--lightgray);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
 }
