@@ -1,23 +1,20 @@
 @use "./variables.scss" as *;
 
-// ── Pixel Indie Game Theme ─────────────────────────────────────
-// Inspired by Celeste, Hyper Light Drifter, Transistor
+// ── Vim / Everforest Theme ─────────────────────────────────────
+// A nature-inspired retro-monochrome / Vim editor aesthetic
 // ────────────────────────────────────────────────────────────────
 
-// ── Design tokens ──────────────────────────────────────────────
 :root {
   --radius-sm: 4px;
-  --radius-md: 6px;
-  --radius-lg: 8px;
-  --card-bg: color-mix(in srgb, var(--light) 90%, var(--secondary));
-  --card-border: color-mix(in srgb, var(--lightgray) 90%, var(--secondary));
-  --card-shadow: 0 2px 0 rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2);
-  --card-shadow-hover: 0 2px 0 var(--secondary), 0 4px 20px rgba(233, 69, 96, 0.25);
-  --neon-glow: 0 0 8px rgba(233, 69, 96, 0.4), 0 0 24px rgba(233, 69, 96, 0.15);
-  --cyan-glow: 0 0 8px rgba(0, 210, 211, 0.4), 0 0 24px rgba(0, 210, 211, 0.15);
+  --radius-md: 4px;
+  --radius-lg: 4px;
+  --card-bg: transparent;
+  --card-border: var(--lightgray);
+  --card-shadow: none;
+  --card-shadow-hover: none;
 }
 
-// ── Custom scrollbar ───────────────────────────────────────────
+// ── Scrollbar ──────────────────────────────────────────────────
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -26,41 +23,31 @@
   background: var(--light);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--secondary);
+  background: var(--lightgray);
   border-radius: 0;
   &:hover {
-    background: var(--tertiary);
+    background: var(--gray);
   }
 }
 
 // ── Page background ────────────────────────────────────────────
 body {
   background: var(--light);
-  // subtle noise texture via CSS
-  &::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.03;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  }
+  color: var(--darkgray);
 }
 
-// ── Sidebar ────────────────────────────────────────────────────
+// ── Sidebar (Vim Split View) ───────────────────────────────────
 .sidebar.left {
-  border-right: 2px solid var(--card-border) !important;
+  background: var(--light) !important;
+  border-right: 1px solid var(--lightgray) !important;
+  padding: 1.5rem 1rem;
 }
 
-// ── Page title (site branding) ─────────────────────────────────
+// ── Page title (Branding as statusline) ────────────────────────
 .page-title {
-  font-size: 1.1rem;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  font-family: var(--headerFont);
+  font-size: 1rem;
+  text-transform: lowercase;
   margin-bottom: 0.5rem;
 
   a {
@@ -68,12 +55,14 @@ body {
     padding: 0 !important;
     color: var(--secondary) !important;
     font-weight: 700;
-    transition: all 0.15s ease;
-    text-shadow: 0 0 12px rgba(233, 69, 96, 0.3);
+    transition: color 0.15s ease;
 
+    &::before {
+      content: " "; // Vim logo icon or custom symbol if font supports, else fallback to standard cursor block
+    }
+    
     &:hover {
       color: var(--tertiary) !important;
-      text-shadow: 0 0 16px rgba(0, 210, 211, 0.5);
     }
   }
 }
@@ -84,101 +73,106 @@ body {
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--headerFont);
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
+    color: var(--dark);
+    font-weight: 700;
+    letter-spacing: -0.01em;
   }
 
   h1 {
     font-size: 1.8rem;
     line-height: 1.3;
-    color: var(--secondary);
-    text-shadow: 0 0 20px rgba(233, 69, 96, 0.2);
     margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--lightgray);
+    padding-bottom: 0.5rem;
   }
 
   h2 {
-    font-size: 1.2rem;
-    margin-top: 2.5rem;
-    padding-bottom: 0.4rem;
-    border-bottom: 2px solid var(--secondary);
-    color: var(--dark);
+    font-size: 1.3rem;
+    margin-top: 2.2rem;
+    padding-bottom: 0.2rem;
+    border-bottom: 1px dashed var(--lightgray);
   }
 
   h3 {
-    font-size: 1rem;
-    color: var(--tertiary);
+    font-size: 1.1rem;
+    color: var(--secondary);
     margin-top: 1.8rem;
   }
 
-  // links
+  // Links
   a {
-    color: var(--secondary);
+    color: var(--tertiary);
     text-decoration: none;
-    border-bottom: 1px dashed var(--secondary);
+    border-bottom: 1px solid var(--lightgray);
     transition: all 0.15s ease;
 
     &:hover {
-      color: var(--tertiary);
-      border-bottom-color: var(--tertiary);
-      text-shadow: 0 0 8px rgba(0, 210, 211, 0.4);
+      color: var(--secondary);
+      border-bottom-color: var(--secondary);
+      background: var(--highlight);
     }
   }
 
   hr {
     border: none;
-    height: 2px;
-    background: linear-gradient(
-      to right,
-      transparent,
-      var(--secondary),
-      var(--tertiary),
-      transparent
-    );
+    height: 1px;
+    background: var(--lightgray);
     margin: 2.5rem 0;
-    box-shadow: 0 0 8px rgba(233, 69, 96, 0.2);
   }
 
   table {
     border-radius: var(--radius-sm);
     overflow: hidden;
-    border: 2px solid var(--card-border);
-    box-shadow: var(--card-shadow);
+    border: 1px solid var(--lightgray);
+    margin: 1.5rem 0;
 
     th {
-      background: color-mix(in srgb, var(--secondary) 15%, var(--light));
+      background: var(--lightgray);
       color: var(--dark);
       font-family: var(--headerFont);
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      font-size: 0.85rem;
+      font-weight: 600;
     }
 
     tr:nth-child(even) td {
-      background: color-mix(in srgb, var(--highlight) 50%, transparent);
+      background: var(--highlight);
     }
   }
 
   blockquote {
     border-radius: var(--radius-sm);
-    border-left: 4px solid var(--secondary);
-    background: color-mix(in srgb, var(--secondary) 6%, var(--light));
+    border-left: 3px solid var(--secondary);
+    background: var(--highlight);
+    color: var(--darkgray);
     padding: 0.8rem 1.2rem;
-    box-shadow: inset 0 0 12px rgba(233, 69, 96, 0.05);
+    margin: 1.5rem 0;
+    font-style: italic;
   }
 
-  // inline code as pixel badges
+  // Code styling
   code {
     font-family: var(--codeFont);
     font-size: 0.85em;
-    background: color-mix(in srgb, var(--secondary) 10%, var(--light));
-    padding: 0.15rem 0.45rem;
-    border-radius: 2px;
-    border: 1px solid color-mix(in srgb, var(--secondary) 25%, transparent);
-    color: var(--secondary);
+    background: var(--lightgray);
+    padding: 0.15rem 0.35rem;
+    border-radius: var(--radius-sm);
+    color: color-mix(in srgb, var(--dark) 80%, var(--secondary));
+  }
+
+  pre {
+    border: 1px solid var(--lightgray);
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--light) 97%, var(--lightgray));
+    
+    code {
+      background: transparent;
+      padding: 0;
+      color: inherit;
+    }
   }
 }
 
-// ── Homepage layout ────────────────────────────────────────────
+// ── Homepage layout (Vim Dashboard) ────────────────────────────
 body[data-slug="index"] {
   .center > article {
     max-width: 54rem;
@@ -200,13 +194,18 @@ body[data-slug="index"] {
     border-bottom: none;
     font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--tertiary);
-    margin-top: 2.5rem;
+    letter-spacing: 0.08em;
+    color: var(--gray);
+    margin-top: 2.2rem;
     margin-bottom: 1rem;
-    // pixel-style "section label"
+    font-family: var(--headerFont);
+    
     &::before {
-      content: "▸ ";
+      content: "[ ";
+      color: var(--secondary);
+    }
+    &::after {
+      content: " ]";
       color: var(--secondary);
     }
   }
@@ -218,69 +217,41 @@ body[data-slug="index"] {
     margin: 0 0 2rem;
   }
 
-  // Cards styled like game UI inventory slots
+  // Cards styled like Vim windows/splits
   .home-card {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 1rem 1.15rem;
-    background: var(--card-bg);
-    border: 2px solid var(--card-border);
+    padding: 1rem 1.25rem;
+    background: transparent;
+    border: 1px solid var(--lightgray);
     border-radius: var(--radius-sm);
-    box-shadow: var(--card-shadow);
     text-decoration: none;
     transition: all 0.15s ease;
-    position: relative;
-    overflow: hidden;
-
-    // subtle gradient stripe at top
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--secondary), var(--tertiary));
-      opacity: 0;
-      transition: opacity 0.15s ease;
-    }
 
     &:hover {
       border-color: var(--secondary);
-      box-shadow: var(--card-shadow-hover);
-      transform: translateY(-2px);
-
-      &::before {
-        opacity: 1;
-      }
-
-      .home-card-icon {
-        border-color: var(--secondary);
-        box-shadow: var(--neon-glow);
-        color: var(--secondary);
-      }
+      background: var(--highlight);
+      transform: none; // flat layout, no translateY
 
       .home-card-title {
         color: var(--secondary);
-        text-shadow: 0 0 8px rgba(233, 69, 96, 0.3);
       }
     }
   }
 
   .home-card-icon {
     flex-shrink: 0;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     line-height: 1;
-    width: 2.75rem;
-    height: 2.75rem;
+    width: 2.5rem;
+    height: 2.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: color-mix(in srgb, var(--lightgray) 50%, var(--light));
-    border: 2px solid var(--card-border);
+    background: var(--lightgray);
     border-radius: var(--radius-sm);
-    transition: all 0.15s ease;
+    color: var(--darkgray);
   }
 
   .home-card-body {
@@ -292,13 +263,11 @@ body[data-slug="index"] {
 
   .home-card-title {
     font-family: var(--headerFont);
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
     color: var(--dark);
     line-height: 1.35;
-    transition: all 0.15s ease;
+    transition: color 0.15s ease;
   }
 
   .home-card-desc {
@@ -310,48 +279,46 @@ body[data-slug="index"] {
   .callout[data-callout="tip"] {
     margin-top: 2rem;
     border-radius: var(--radius-sm);
-    border: 2px solid color-mix(in srgb, var(--tertiary) 40%, var(--lightgray));
-    background: color-mix(in srgb, var(--tertiary) 6%, var(--light));
-
-    &::before {
-      content: "";
-      display: block;
-      height: 2px;
-      background: linear-gradient(90deg, var(--tertiary), transparent);
-    }
+    border: 1px solid var(--lightgray);
+    background: var(--highlight);
   }
 }
 
-// ── Explorer tree ──────────────────────────────────────────────
+// ── Explorer (like Neovim file tree) ───────────────────────────
 .explorer {
   h2 {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    text-transform: lowercase;
+    letter-spacing: 0.02em;
     color: var(--gray);
-
-    &::before {
-      content: "// ";
-      color: var(--secondary);
-      opacity: 0.6;
-    }
+    font-family: var(--headerFont);
+    margin-bottom: 0.8rem;
+  }
+  
+  .explorer-content {
+    font-family: var(--headerFont);
+    font-size: 0.85rem;
   }
 }
 
-// ── TOC sidebar ────────────────────────────────────────────────
+// ── TOC sidebar (like Symbols-outline) ─────────────────────────
 .toc {
+  background: var(--light) !important;
   border-radius: var(--radius-sm);
-  border: 2px solid var(--card-border);
-  background: var(--card-bg);
-  box-shadow: var(--card-shadow);
-  padding: 0.75rem 1rem;
+  border: 1px solid var(--lightgray);
+  padding: 0.8rem;
 
   .toc-header h3 {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    text-transform: lowercase;
+    letter-spacing: 0.02em;
     color: var(--gray);
     font-family: var(--headerFont);
+  }
+  
+  ul {
+    font-family: var(--headerFont);
+    font-size: 0.85rem;
   }
 }
 
@@ -364,8 +331,8 @@ body[data-slug="index"] {
   transition: all 0.15s ease;
 
   &:hover {
-    border-color: var(--secondary) !important;
-    box-shadow: 0 0 8px rgba(233, 69, 96, 0.2);
+    border-color: var(--lightgray) !important;
+    background: var(--lightgray) !important;
   }
 }
 
@@ -373,33 +340,17 @@ body[data-slug="index"] {
 .content-meta {
   color: var(--gray);
   font-size: 0.8rem;
-  font-family: var(--codeFont);
+  font-family: var(--headerFont);
 }
 
-// ── Article title ──────────────────────────────────────────────
-.article-title h1 {
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
+// ── Selection color ────────────────────────────────────────────
+::selection {
+  background: var(--lightgray);
+  color: var(--dark);
 }
 
 // ── Images ─────────────────────────────────────────────────────
 article img {
   border-radius: var(--radius-sm);
-  border: 2px solid var(--card-border);
-  box-shadow: var(--card-shadow);
-}
-
-// ── Selection color ────────────────────────────────────────────
-::selection {
-  background: color-mix(in srgb, var(--secondary) 30%, transparent);
-  color: var(--dark);
-}
-
-// ── Dark mode adjustments ──────────────────────────────────────
-:root[saved-theme="dark"] {
-  --card-bg: color-mix(in srgb, var(--light) 90%, var(--lightgray));
-  --card-border: color-mix(in srgb, var(--lightgray) 90%, var(--secondary));
-  --card-shadow: 0 2px 0 rgba(0, 0, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.4);
-  --card-shadow-hover: 0 2px 0 var(--secondary), 0 4px 24px rgba(233, 69, 96, 0.3);
-  --neon-glow: 0 0 10px rgba(233, 69, 96, 0.5), 0 0 30px rgba(233, 69, 96, 0.2);
+  border: 1px solid var(--lightgray);
 }
