@@ -1,0 +1,13 @@
+---
+pid: 29768
+cwd: "C:\_proekty\python\my_site"
+command: "Start-Sleep -Seconds 90; curl -s \"https://api.github.com/repos/tuber84/tuber_site/actions/runs?per_page=3\" | python -c \"import sys,json; [print(r['head_sha'][:7], r['status'], r['conclusion']) for r in json.load(sys.stdin)['workflow_runs'][:3]]\"; curl -s \"https://tuber84.github.io/tuber_site/\" | python -c \"import sys,re; h=sys.stdin.read(); print('title:', re.search(r'<title>([^<]+)', h).group(1) if re.search(r'<title>', h) else 'n/a'); print('cards:', h.count('home-card')); print('broken fm:', 'title-добро' in h)\""
+started_at: 2026-07-06T20:03:27.243Z
+running_for_ms: 28019998 
+---
+342b8ac waiting None
+31a483a completed success
+469c2f7 completed success
+title: Без названия
+cards: 0
+broken fm: True

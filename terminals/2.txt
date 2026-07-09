@@ -1,0 +1,8 @@
+---
+pid: 21600
+cwd: "C:\_proekty\python\my_site"
+command: "Start-Sleep -Seconds 60; curl -s \"https://api.github.com/repos/tuber84/tuber_site/actions/runs/28814927229\" | python -c \"import sys,json; r=json.load(sys.stdin); print(r['status'], r['conclusion'])\""
+started_at: 2026-07-06T18:44:30.349Z
+running_for_ms: 32754999 
+---
+completed success

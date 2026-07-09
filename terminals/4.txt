@@ -1,0 +1,12 @@
+---
+pid: 26132
+cwd: "C:\_proekty\python\my_site"
+command: "Start-Sleep -Seconds 60; curl -s \"https://api.github.com/repos/tuber84/tuber_site/actions/runs?per_page=1\" | python -c \"import sys,json; r=json.load(sys.stdin)['workflow_runs'][0]; print(r['status'], r['conclusion'])\"; curl -s \"https://tuber84.github.io/tuber_site/\" | python -c \"import sys,re; h=sys.stdin.read(); print('title:', re.search(r'<title>([^<]+)', h).group(1)); print('site:', 'Цифровой Сад' in h); print('cards:', h.count('home-card')); print('broken:', 'title-добро' in h)\""
+started_at: 2026-07-06T20:05:38.737Z
+running_for_ms: 27884996 
+---
+completed success
+title: Добро пожаловать в мой Цифровой Сад 🌿
+site: True
+cards: 20
+broken: False

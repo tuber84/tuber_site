@@ -1,0 +1,18 @@
+---
+pid: 39924
+cwd: "C:\_proekty\python\my_site"
+command: "node ./quartz/bootstrap-cli.mjs build"
+started_at: 2026-07-06T18:30:52.663Z
+running_for_ms: 33574994 
+---
+
+ Quartz v5.0.0  
+
+Cleaned output directory `public` in 16ms
+Found 5 input files from `content` in 16ms
+Parsing input files using 1 threads
+Parsed 5 Markdown files in 393ms
+Filtered out 0 files in 77μs
+Emitting files
+Emitted 129 files to `public` in 3s
+Done processing 5 files in 4s
