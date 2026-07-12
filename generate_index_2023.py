@@ -23,10 +23,19 @@ for f in files:
         continue
         
     room_title = "Зал"
-    if 'Желтый' in filename: room_title = '🩸 Желтый зал'
-    elif 'Зеленый' in filename: room_title = '🧒 Зеленый зал'
-    elif 'Красный' in filename: room_title = '🧠 Красный зал'
-    elif 'Синий' in filename: room_title = '🦶 Синий зал'
+    room_class = ""
+    if 'Желтый' in filename: 
+        room_title = '🩸 Желтый зал'
+        room_class = 'room-yellow'
+    elif 'Зеленый' in filename: 
+        room_title = '🧒 Зеленый зал'
+        room_class = 'room-green'
+    elif 'Красный' in filename: 
+        room_title = '🧠 Красный зал'
+        room_class = 'room-red'
+    elif 'Синий' in filename: 
+        room_title = '🦶 Синий зал'
+        room_class = 'room-blue'
 
     # get main youtube link
     yt_match = re.search(r'<div class="src">🔗 <a href="(https://youtu\.be/[^"]+)"', content)
@@ -61,6 +70,7 @@ for f in files:
     days[day_key].append({
         'filename': filename,
         'room': room_title,
+        'room_class': room_class,
         'yt': yt_base,
         'blocks': blocks
     })
@@ -98,6 +108,10 @@ transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic
 .card:hover{transform: translateY(-4px);
 box-shadow: 0 12px 24px -12px var(--theme-shadow, rgba(0,0,0,0.5)), inset 0 40px 50px -40px var(--theme-shadow, transparent);
 border-color: #333a4a; border-top-color: var(--theme-color, var(--navy));}
+.room-yellow{--theme-color:#ffd166;--theme-shadow:rgba(255,209,102,0.18)}
+.room-green{--theme-color:#06d6a0;--theme-shadow:rgba(6,214,160,0.18)}
+.room-red{--theme-color:#ef476f;--theme-shadow:rgba(239,71,111,0.18)}
+.room-blue{--theme-color:#118ab2;--theme-shadow:rgba(17,138,178,0.18)}
 .card h3{margin:0 0 4px;font-size:18px; transition: color 0.2s ease;}
 .card:hover h3{color: var(--theme-color, var(--fg));}
 .card .roomlink{font-size:12px;color:var(--acc);text-decoration:none;font-weight:600}
@@ -124,7 +138,7 @@ border-color: #333a4a; border-top-color: var(--theme-color, var(--navy));}
   <circle cx="61.3" cy="51.6" r="1.3" fill="#fff"/>
   <ellipse cx="50" cy="63" rx="4" ry="2.6" fill="#132a52"/>
 </svg>
-<div class="wordmark"><span class="angio">ANGIO</span><span class="picture"><b>PICTURE</b> Сочи 2023</span></div></div><div><div class="tags" style="margin-top:0;font-size:15px;color:#dfe4ee;font-weight:600">АнгиоПикча Сочи 2023</div><div class="tags"><span class="tag">medicine</span><span class="tag">conference</span><span class="tag">endovascular</span> · 8 записей · 2 дня · скриншоты + кликабельные таймкоды на YouTube</div></div></header><div style="margin-bottom:18px;"><a href="../index.html" style="color:var(--muted); text-decoration:none; font-size:14px; display:inline-flex; align-items:center; gap:6px; background:#1b1f28; padding:8px 14px; border-radius:10px; border:1px solid #2a2f3a; font-weight:600; transition: color 0.2s, border-color 0.2s;" onmouseover="this.style.color='#e7ebf3'; this.style.borderColor='#4da6ff'" onmouseout="this.style.color='var(--muted)'; this.style.borderColor='#2a2f3a'">← Назад ко всем конференциям</a></div><div class="tocswitch"><button class="tsw active" data-day="26">26.05.23</button><button class="tsw " data-day="27">27.05.23</button></div>
+<div class="wordmark"><span class="angio">ANGIO</span><span class="picture"><b>PICTURE</b> Сочи 2023</span></div></div><div><div class="tags" style="margin-top:0;font-size:15px;color:#dfe4ee;font-weight:600">АнгиоПикча Сочи 2023</div><div class="tags"><span class="tag">medicine</span><span class="tag">conference</span><span class="tag">endovascular</span> · 8 записей · 2 дня · скриншоты + таймкоды</div><div style="margin-top:8px;"><a href="https://angiopicture.ru/upload/files/198/program_angiopicture_2023_grid.pdf" target="_blank" style="display:inline-flex; align-items:center; gap:6px; color:var(--fg); background:var(--card); text-decoration:none; padding:4px 10px; border-radius:6px; border:1px solid #2a3550; font-size:13px; font-weight:600; transition:border-color 0.2s;"><span style="color:#e0231e;">📄</span> Официальная программа (PDF)</a></div></div></header><div style="margin-bottom:18px;"><a href="../index.html" style="color:var(--muted); text-decoration:none; font-size:14px; display:inline-flex; align-items:center; gap:6px; background:#1b1f28; padding:8px 14px; border-radius:10px; border:1px solid #2a2f3a; font-weight:600; transition: color 0.2s, border-color 0.2s;" onmouseover="this.style.color='#e7ebf3'; this.style.borderColor='#4da6ff'" onmouseout="this.style.color='var(--muted)'; this.style.borderColor='#2a2f3a'">← Назад ко всем конференциям</a></div><div class="tocswitch"><button class="tsw active" data-day="26">26.05.23</button><button class="tsw " data-day="27">27.05.23</button></div>
 """
 
 day_keys = [('26_мая_2023', '26'), ('27_мая_2023', '27')]
@@ -138,7 +152,7 @@ for (dk, did) in day_keys:
     sorted_rooms = sorted(days[dk], key=lambda x: room_order.index(x['room']) if x['room'] in room_order else 99)
     
     for room in sorted_rooms:
-        html += f'<section class="card"><h3>{room["room"]}</h3><a class="roomlink" href="{room["filename"]}" target="_blank" rel="noopener">📄 Открыть полный разбор ({len(room["blocks"])} тем)</a><ul class="lectures">'
+        html += f'<section class="card {room["room_class"]}"><h3>{room["room"]}</h3><a class="roomlink" href="{room["filename"]}" target="_blank" rel="noopener">📄 Открыть полный разбор ({len(room["blocks"])} тем)</a><ul class="lectures">'
         for b in room["blocks"]:
             html += f'<li><a class="ts" href="{room["yt"]}?t={b["seconds"]}s" target="_blank" rel="noopener">▶ {b["time_str"]}</a><span class="lname">{b["title"]}</span><a class="miniref" href="{room["filename"]}" target="_blank" rel="noopener" title="Открыть разбор">📄</a></li>'
         html += '</ul></section>'
