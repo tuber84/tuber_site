@@ -1,7 +1,7 @@
-﻿import os
+import os
 import glob
 
-dir_path = r'c:\_proekty\python\my_site\quartz\static\angiopikcha'
+dir_path = r'c:\_proekty\python\my_site\quartz\static\angiopikcha\сочи_2023'
 files = glob.glob(os.path.join(dir_path, 'YT_*.html'))
 
 old_str = '<h2>⭐ Самое ценное</h2>'

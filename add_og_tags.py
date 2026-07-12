@@ -3,7 +3,8 @@ import re
 
 directories = [
     r"c:\_proekty\python\my_site\quartz\static\angiopikcha\сочи_2024",
-    r"c:\_proekty\python\my_site\quartz\static\angiopikcha\kazan_2025"
+    r"c:\_proekty\python\my_site\quartz\static\angiopikcha\kazan_2025",
+    r"c:\_proekty\python\my_site\quartz\static\angiopikcha\сочи_2023"
 ]
 
 description = "Скриншоты и таймкоды докладов. Внимание: звёзды и сортировка — результат экспериментального ИИ-анализа, а не оценка научной значимости."
