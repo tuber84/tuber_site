@@ -125,19 +125,7 @@ border-color: #333a4a; border-top-color: var(--theme-color, var(--navy));}
 .miniref:hover{color:var(--fg)}
 @media(max-width:700px){header{flex-wrap:wrap}}
 </style></head><body><div class="wrap"><header><div class="brand">
-<svg viewBox="0 0 100 100" width="56" height="56" aria-hidden="true">
-  <path d="M18 8 L34 34 L14 40 Z" fill="#132a52"/>
-  <path d="M82 8 L66 34 L86 40 Z" fill="#132a52"/>
-  <circle cx="50" cy="52" r="34" fill="#132a52"/>
-  <ellipse cx="50" cy="60" rx="21" ry="17" fill="#f3f5f8"/>
-  <circle cx="40" cy="52" r="7.5" fill="#f3f5f8"/>
-  <circle cx="60" cy="52" r="7.5" fill="#f3f5f8"/>
-  <circle cx="40" cy="53" r="4" fill="#132a52"/>
-  <circle cx="60" cy="53" r="4" fill="#132a52"/>
-  <circle cx="41.3" cy="51.6" r="1.3" fill="#fff"/>
-  <circle cx="61.3" cy="51.6" r="1.3" fill="#fff"/>
-  <ellipse cx="50" cy="63" rx="4" ry="2.6" fill="#132a52"/>
-</svg>
+<img src="mascot.png" alt="Маскот 2023" style="height: 64px; width: auto; object-fit: contain;">
 <div class="wordmark"><span class="angio">ANGIO</span><span class="picture"><b>PICTURE</b> Сочи 2023</span></div></div><div><div class="tags" style="margin-top:0;font-size:15px;color:#dfe4ee;font-weight:600">АнгиоПикча Сочи 2023</div><div class="tags"><span class="tag">medicine</span><span class="tag">conference</span><span class="tag">endovascular</span> · 8 записей · 2 дня · скриншоты + таймкоды</div><div style="margin-top:8px;"><a href="https://angiopicture.ru/upload/files/198/program_angiopicture_2023_grid.pdf" target="_blank" style="display:inline-flex; align-items:center; gap:6px; color:var(--fg); background:var(--card); text-decoration:none; padding:4px 10px; border-radius:6px; border:1px solid #2a3550; font-size:13px; font-weight:600; transition:border-color 0.2s;"><span style="color:#e0231e;">📄</span> Официальная программа (PDF)</a></div></div></header><div style="margin-bottom:18px;"><a href="../index.html" style="color:var(--muted); text-decoration:none; font-size:14px; display:inline-flex; align-items:center; gap:6px; background:#1b1f28; padding:8px 14px; border-radius:10px; border:1px solid #2a2f3a; font-weight:600; transition: color 0.2s, border-color 0.2s;" onmouseover="this.style.color='#e7ebf3'; this.style.borderColor='#4da6ff'" onmouseout="this.style.color='var(--muted)'; this.style.borderColor='#2a2f3a'">← Назад ко всем конференциям</a></div><div class="tocswitch"><button class="tsw active" data-day="26">26.05.23</button><button class="tsw " data-day="27">27.05.23</button></div>
 """
 
