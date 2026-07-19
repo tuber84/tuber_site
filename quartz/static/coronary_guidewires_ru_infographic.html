@@ -184,51 +184,14 @@
       font-weight: 600;
     }
   
-    .coating-chart {
-      background: #f5f9ff;
-      border: 1px solid #bbdefb;
-      border-radius: 12px;
-      padding: 20px 20px 14px;
-      margin: 18px 0;
-    }
-    .chart-axes { position: relative; height: 0; }
-    .axis-y-line {
-      position: absolute; left: 0; top: 10px;
-      height: 290px; width: 3px;
-      background: #1b5e20; border-radius: 2px;
-    }
-    .axis-x-line {
-      position: absolute; left: 3px; top: 298px;
-      height: 3px; width: calc(100% - 6px);
-      background: #1b5e20; border-radius: 2px;
-    }
-    .axis-y-label {
-      position: absolute; left: 10px; top: -2px;
-      color: #1b5e20; font-weight: 700;
-      font-size: 0.82rem; white-space: nowrap;
-    }
-    .axis-x-label {
-      position: absolute; right: 6px; top: 304px;
-      color: #1b5e20; font-weight: 700;
-      font-size: 0.82rem; white-space: nowrap;
-    }
-    .chart-plot {
-      position: relative; height: 300px;
-      margin: 10px 0 26px;
-    }
-    .coat-box {
-      position: absolute;
-      background: #0d47a1; color: white;
-      border-radius: 8px; padding: 10px 14px;
-      font-size: 0.85rem; max-width: 220px;
-      box-shadow: 0 3px 10px rgba(13,71,161,0.25);
-      z-index: 2;
-    }
-    .coat-box small { opacity: 0.85; font-weight: 400; }
-    @media (max-width: 600px) {
-      .coat-box { font-size: 0.78rem; max-width: 170px; padding: 8px 10px; }
-      .chart-plot { height: 260px; }
-      .axis-y-label, .axis-x-label { font-size: 0.75rem; }
+    .original-img { width: 100%; height: auto; display: block; }
+    .content img.original-img { max-width: 100%; }
+    @media (max-width: 720px) {
+      header h1 { font-size: 1.45rem; }
+      header .subtitle { font-size: 0.96rem; }
+      .wire { font-size: 0.92rem; }
+      .card, .note, .cheat { border-radius: 10px; }
+      .content { padding: 18px 12px 24px; }
     }
 
   </style>
@@ -249,7 +212,7 @@
       <div class="intro">
         <strong>Суть:</strong> Проводники делятся на <strong>неполимерные</strong> (лучшая тактильная обратная связь и контроль формы кончика) 
         и <strong>полимерные</strong> (максимальная скользкость по микроканалам и рыхлой ткани, но меньше feedback).  
-        Ключевые оси выбора: <em>tip load</em>, <em>tapered tip</em>, тип покрытия, склонность к knuckle и rail support.
+        Ключевые оси выбора: <em>tip load</em>, <em>tapered tip</em>, тип покрытия, склонность к loop и rail support.
       </div>
 
       <h2>Оригинальная схема</h2>
@@ -312,39 +275,12 @@
       </div>
 
       <!-- Покрытие -->
-            <h2>Покрытие vs петлеобразование (loop / knuckle)</h2>
-      <div class="coating-chart">
-        <div class="chart-axes">
-          <div class="axis-y-line"></div>
-          <div class="axis-x-line"></div>
-          <div class="axis-y-label">↑ Менее травматично</div>
-          <div class="axis-x-label">Лучше петлеобразование →</div>
-        </div>
-        <div class="chart-plot">
-          <div class="coat-box" style="top:12%; left:6%;">
-            <strong>Полимерное</strong><br>
-            <small>супергидрофильное</small>
-          </div>
-          <div class="coat-box" style="top:37%; left:28%;">
-            <strong>Гидрофильное</strong><br>
-            <small>покрытие</small>
-          </div>
-          <div class="coat-box" style="top:58%; left:50%;">
-            <strong>Гибрид</strong><br>
-            <small>гидрофильный корпус<br>+ гидрофобный кончик</small>
-          </div>
-          <div class="coat-box" style="top:80%; left:72%;">
-            <strong>Гидрофобное</strong><br>
-            <small>или без покрытия</small>
-          </div>
-        </div>
-        <div class="chart-legend" style="margin-top:14px; font-size:0.85rem; color:#546e7a; text-align:center;">
-          По диагонали: чем лучше петлеобразование → тем выше травматичность.
-          Полимер — наименее травматичен, но слабо формирует петлю.
-          Гидрофобный / без покрытия — лучшая петля, но максимальный риск.
-        </div>
+            <h2>Покрытие vs петлеобразование (loop)</h2>
+      <img class="original-img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9Ijc2MCIgdmlld0JveD0iMCAwIDEyMDAgNzYwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y3ZmJmZiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlZWY3ZmYiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8ZmlsdGVyIGlkPSJzaGFkb3ciIHg9Ii0yMCUiIHk9Ii0yMCUiIHdpZHRoPSIxNDAlIiBoZWlnaHQ9IjE0MCUiPgogICAgICA8ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iNSIgc3RkRGV2aWF0aW9uPSI3IiBmbG9vZC1jb2xvcj0iIzFiNGY3MiIgZmxvb2Qtb3BhY2l0eT0iMC4xNSIvPgogICAgPC9maWx0ZXI+CiAgPC9kZWZzPgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMjAwIiBoZWlnaHQ9Ijc2MCIgZmlsbD0idXJsKCNiZykiLz4KICA8cmVjdCB4PSIzMTAiIHk9IjQwIiByeD0iMTgiIHJ5PSIxOCIgd2lkdGg9IjU4MCIgaGVpZ2h0PSI3OCIgZmlsbD0iIzBkNDdhMSIgZmlsdGVyPSJ1cmwoI3NoYWRvdykiLz4KICA8dGV4dCB4PSI2MDAiIHk9Ijc1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iU2Vnb2UgVUksIEFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjMxIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjZmZmZmZmIj7Qn9C+0LrRgNGL0YLQuNC1IHZzINC/0LXRgtC70LXQvtCx0YDQsNC30L7QstCw0L3QuNC1PC90ZXh0PgogIDx0ZXh0IHg9IjYwMCIgeT0iMTA0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iU2Vnb2UgVUksIEFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjIzIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjZmZmZmZmIj4obG9vcCk8L3RleHQ+CgogIDxsaW5lIHgxPSIxNjAiIHkxPSIxNjAiIHgyPSIxNjAiIHkyPSI2NzUiIHN0cm9rZT0iIzFiNWUyMCIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cG9seWdvbiBwb2ludHM9IjE2MCwxNDAgMTQ2LDE2NiAxNzQsMTY2IiBmaWxsPSIjMWI1ZTIwIi8+CiAgPHBvbHlnb24gcG9pbnRzPSIxNjAsNjk1IDE0Niw2NjkgMTc0LDY2OSIgZmlsbD0iIzFiNWUyMCIvPgogIDx0ZXh0IHg9IjE4MCIgeT0iMTUwIiBmb250LWZhbWlseT0iU2Vnb2UgVUksIEFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMWI1ZTIwIj7QvNC10L3QtdC1INGC0YDQsNCy0LzQsNGC0LjRh9C90L48L3RleHQ+CiAgPHRleHQgeD0iMTg1IiB5PSI3MDMiIGZvbnQtZmFtaWx5PSJTZWdvZSBVSSwgQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMxYjVlMjAiPtC70YPRh9GI0LUg0YTQvtGA0LzQuNGA0YPQtdGCIMKr0L/QtdGC0LvRjsK7IC8gbG9vcDwvdGV4dD4KCiAgPHJlY3QgeD0iMjUwIiB5PSIxODAiIHJ4PSIxNiIgcnk9IjE2IiB3aWR0aD0iNzYwIiBoZWlnaHQ9IjkyIiBmaWxsPSIjZDZlYmZmIiBzdHJva2U9IiM5Y2M3ZWYiIHN0cm9rZS13aWR0aD0iNCIgZmlsdGVyPSJ1cmwoI3NoYWRvdykiLz4KICA8dGV4dCB4PSI2MzAiIHk9IjIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IlNlZ29lIFVJLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyOSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMWYzMyI+0J/QvtC70LjQvNC10YDQvdC+0LUg0L/QvtC60YDRi9GC0LjQtTwvdGV4dD4KICA8dGV4dCB4PSI2MzAiIHk9IjI1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IlNlZ29lIFVJLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNyIgZm9udC13ZWlnaHQ9IjYwMCIgZmlsbD0iIzFhMmU0NSI+0YHRg9C/0LXRgNCz0LjQtNGA0L7RhNC40LvRjNC90L7QtTwvdGV4dD4KCiAgPHJlY3QgeD0iMjkwIiB5PSIzMTUiIHJ4PSIxNiIgcnk9IjE2IiB3aWR0aD0iNzAwIiBoZWlnaHQ9Ijg4IiBmaWxsPSIjZDZlYmZmIiBzdHJva2U9IiM5Y2M3ZWYiIHN0cm9rZS13aWR0aD0iNCIgZmlsdGVyPSJ1cmwoI3NoYWRvdykiLz4KICA8dGV4dCB4PSI2NDAiIHk9IjM3MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IlNlZ29lIFVJLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMCIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMWYzMyI+0JPQuNC00YDQvtGE0LjQu9GM0L3QvtC1INC/0L7QutGA0YvRgtC40LU8L3RleHQ+CgogIDxyZWN0IHg9IjI1MCIgeT0iNDQ1IiByeD0iMTYiIHJ5PSIxNiIgd2lkdGg9Ijc2MCIgaGVpZ2h0PSI5OCIgZmlsbD0iI2Q2ZWJmZiIgc3Ryb2tlPSIjOWNjN2VmIiBzdHJva2Utd2lkdGg9IjQiIGZpbHRlcj0idXJsKCNzaGFkb3cpIi8+CiAgPHRleHQgeD0iNjMwIiB5PSI0ODIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJTZWdvZSBVSSwgQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjciIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwZjFmMzMiPtCT0LjQsdGA0LjQtDog0LPQuNC00YDQvtGE0LjQu9GM0L3Ri9C5INC60L7RgNC/0YPRgTwvdGV4dD4KICA8dGV4dCB4PSI2MzAiIHk9IjUxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IlNlZ29lIFVJLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMWYzMyI+KyDQs9C40LTRgNC+0YTQvtCx0L3Ri9C5INC60L7QvdGH0LjQujwvdGV4dD4KCiAgPHJlY3QgeD0iMjQwIiB5PSI1ODUiIHJ4PSIxNiIgcnk9IjE2IiB3aWR0aD0iODAwIiBoZWlnaHQ9Ijk4IiBmaWxsPSIjZDZlYmZmIiBzdHJva2U9IiM5Y2M3ZWYiIHN0cm9rZS13aWR0aD0iNCIgZmlsdGVyPSJ1cmwoI3NoYWRvdykiLz4KICA8dGV4dCB4PSI2NDAiIHk9IjYyMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IlNlZ29lIFVJLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMWYzMyI+0JPQuNC00YDQvtGE0L7QsdC90L7QtSDQv9C+0LrRgNGL0YLQuNC1INC40LvQuDwvdGV4dD4KICA8dGV4dCB4PSI2NDAiIHk9IjY1NyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IlNlZ29lIFVJLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmMWYzMyI+0LHQtdC3INC/0L7QutGA0YvRgtC40Y88L3RleHQ+Cjwvc3ZnPg==" alt="Диаграмма покрытия vs петлеобразование">
+      <div class="note" style="margin-top:12px;">
+        <strong>Смысл:</strong> сверху — менее травматично, ниже — лучше петлеобразование / loop.
+        На телефоне это читается лучше, чем мелкая вёрстка. Без героизма, просто крупная картинка.
       </div>
-
       <!-- Пенетрация -->
       <h2>Пенетрирующая способность</h2>
       <div class="grid-2">
@@ -357,7 +293,7 @@
           <h4>Промежуточная 3–4 г</h4>
           <p><strong>Gaia 2nd</strong> (неполимерный)<br>
           <strong>Pilot 200 / Mongo</strong> (полимерные)<br>
-          Controlled penetration, knuckle/dissection</p>
+          Controlled penetration, loop/dissection</p>
         </div>
       </div>
       <div class="card" style="margin-top:14px; border-color:#ffcdd2;">
